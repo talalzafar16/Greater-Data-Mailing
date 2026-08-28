@@ -199,8 +199,14 @@
    Base
 --------------------------------------------------------------------------- */
 @layer base {
+  /*
+    `outline-ring/50` removed from here: it set a competing `outline-color` on
+    every element, so focused controls picked up a half-transparent ring
+    instead of the solid one defined at the bottom of this file. Outlines are
+    owned by that single rule now.
+  */
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
 
   html {
@@ -341,9 +347,14 @@
    interactive element in the app.
 --------------------------------------------------------------------------- */
 :focus-visible {
+  /*
+    The shadcn components' `outline-none` / `focus:outline-none` utilities were
+    stripped so this rule is the only thing drawing focus. They also had
+    `focus:ring-0 focus:outline-none` on links inside the nav dropdown panel,
+    which removed the indicator entirely from a keyboard path.
+  */
   outline: 2px solid var(--growth-deep);
   outline-offset: 2px;
-  border-radius: var(--radius-button);
 }
 
 @media (prefers-reduced-motion: reduce) {

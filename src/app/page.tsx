@@ -1,3 +1,7 @@
+import type { Metadata } from "next";
+
+import { buildMetadata } from "@/lib/metadata";
+
 import { CTABand } from "@/components/sections/cta-band";
 import { Hero } from "@/components/sections/hero";
 import { IndustriesStrip } from "@/components/sections/industries-strip";
@@ -7,6 +11,10 @@ import { StatsBand } from "@/components/sections/stats-band";
 import { Testimonials } from "@/components/sections/testimonials";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { WhyUs } from "@/components/sections/why-us";
+
+// Title and description are inherited from the root layout; only the canonical
+// needs stating, since the layout deliberately sets none.
+export const metadata: Metadata = buildMetadata("/");
 
 /*
   Background rhythm, top to bottom:
@@ -34,10 +42,7 @@ export default function Home() {
       <StatsBand />
       <IndustriesStrip />
       <Testimonials />
-      <CTABand
-        title="Let's talk about your next mailing."
-        subtitle="Tell us what you're sending and we'll come back with pricing and a plan."
-      />
+      <CTABand />
     </main>
   );
 }

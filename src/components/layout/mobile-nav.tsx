@@ -37,7 +37,7 @@ function MobileNav({ className }: { className?: string }) {
   const linkClass = (active: boolean) =>
     cn(
       "block rounded-lg py-2 text-xl font-medium transition-colors",
-      active ? "text-growth" : "text-ink hover:text-growth"
+      active ? "text-growth-text" : "text-ink hover:text-growth-text"
     );
 
   return (
@@ -103,7 +103,7 @@ function MobileNav({ className }: { className?: string }) {
                       <AccordionTrigger
                         className={cn(
                           "py-2 text-xl font-medium hover:no-underline",
-                          active ? "text-growth" : "text-ink"
+                          active ? "text-growth-text" : "text-ink"
                         )}
                       >
                         {item.label}
@@ -116,7 +116,7 @@ function MobileNav({ className }: { className?: string }) {
                             <SheetClose asChild>
                               <Link
                                 href={item.href}
-                                className="block py-2 text-base text-slate transition-colors hover:text-growth"
+                                className="block py-2 text-base text-slate transition-colors hover:text-growth-text"
                               >
                                 All {item.label}
                               </Link>
@@ -134,9 +134,9 @@ function MobileNav({ className }: { className?: string }) {
                                       : undefined
                                   }
                                   className={cn(
-                                    "block py-2 text-base transition-colors hover:text-growth",
+                                    "block py-2 text-base transition-colors hover:text-growth-text",
                                     isActivePath(pathname, child.href)
-                                      ? "text-growth"
+                                      ? "text-growth-text"
                                       : "text-slate"
                                   )}
                                 >
@@ -164,7 +164,7 @@ function MobileNav({ className }: { className?: string }) {
 
           <a
             href={site.phone.href}
-            className="flex items-center justify-center gap-2 text-base font-medium text-ink transition-colors hover:text-growth"
+            className="flex items-center justify-center gap-2 text-base font-medium text-ink transition-colors hover:text-growth-text"
           >
             <Phone className="size-4" aria-hidden="true" />
             {site.phone.label}

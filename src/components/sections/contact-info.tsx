@@ -9,9 +9,8 @@ import {
 
 import { MapEmbed } from "@/components/ui/map-embed";
 import { site } from "@/data/site";
+import { contactCopy } from "@/data/copy";
 
-// TODO: confirm hours with client
-const HOURS = "Monday – Friday, 8:30am – 5:00pm";
 
 function InfoRow({
   icon: Icon,
@@ -26,7 +25,7 @@ function InfoRow({
     <div className="flex gap-4">
       <span
         aria-hidden="true"
-        className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-growth/10 text-growth"
+        className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-growth/10 text-growth-text"
       >
         <Icon className="size-4" />
       </span>
@@ -38,13 +37,13 @@ function InfoRow({
   );
 }
 
-const linkClass = "transition-colors hover:text-growth";
+const linkClass = "transition-colors hover:text-growth-text";
 
 function ContactInfo() {
   return (
     <div className="flex flex-col gap-6">
       <div className="on-light rounded-xl border border-border bg-white p-6 sm:p-8">
-        <h2 className="text-2xl">Reach us directly</h2>
+        <h2 className="text-2xl">{contactCopy.infoHeading}</h2>
 
         <div className="mt-8 flex flex-col gap-6">
           <InfoRow icon={MapPin} label="Address">
@@ -74,16 +73,16 @@ function ContactInfo() {
           </InfoRow>
 
           <InfoRow icon={Clock} label="Business hours">
-            {HOURS}
+            {contactCopy.hours}
           </InfoRow>
         </div>
 
         <div className="mt-8 rounded-lg bg-growth/10 p-5">
           <p className="text-base text-ink">
-            Prefer to talk it through? Call{" "}
+            {contactCopy.calloutPrefix}{" "}
             <a
               href={site.phone.href}
-              className="font-semibold text-growth underline underline-offset-4"
+              className="font-semibold text-growth-text underline underline-offset-4"
             >
               {site.phone.label}
             </a>

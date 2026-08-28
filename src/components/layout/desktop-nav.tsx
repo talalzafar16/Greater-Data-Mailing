@@ -84,7 +84,7 @@ function DesktopNav({ className }: { className?: string }) {
                             className="group/panel flex h-full items-start gap-4 rounded-lg p-4 transition-colors hover:bg-paper"
                           >
                             {Icon ? (
-                              <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-growth/10 text-growth">
+                              <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-growth/10 text-growth-text">
                                 <Icon className="size-5" aria-hidden="true" />
                               </span>
                             ) : null}

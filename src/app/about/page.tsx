@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { buildMetadata } from "@/lib/metadata";
+
 import { AboutStory } from "@/components/sections/about-story";
 import { CTABand } from "@/components/sections/cta-band";
 import { FacilityGallery } from "@/components/sections/facility-gallery";
@@ -7,12 +9,9 @@ import { MissionCallout } from "@/components/sections/mission-callout";
 import { PageHero } from "@/components/sections/page-hero";
 import { PresidentProfile } from "@/components/sections/president-profile";
 import { ValuesGrid } from "@/components/sections/values-grid";
+import { aboutCopy } from "@/data/copy";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "A full-service direct marketing company in Deer Park, New York, run by people who have been doing this for decades.",
-};
+export const metadata: Metadata = buildMetadata("/about");
 
 /*
   Background rhythm: ink → white → paper → white → paper → white → growth.
@@ -22,8 +21,8 @@ export default function AboutPage() {
   return (
     <main>
       <PageHero
-        title="Growth through marketing, since day one."
-        subtitle="A full-service direct marketing company in Deer Park, New York — printing, mailing, and data under one roof."
+        title={aboutCopy.heroTitle}
+        subtitle={aboutCopy.heroSubtitle}
       />
 
       <AboutStory />
@@ -32,10 +31,7 @@ export default function AboutPage() {
       <ValuesGrid />
       <FacilityGallery />
 
-      <CTABand
-        title="Let's talk about your next mailing."
-        subtitle="Tell us what you're sending and we'll come back with pricing and a plan."
-      />
+      <CTABand />
     </main>
   );
 }

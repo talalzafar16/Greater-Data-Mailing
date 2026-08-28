@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
+import { ctaBandCopy } from "@/data/copy";
 
 interface CTABandProps extends React.ComponentProps<"section"> {
   title?: string;
@@ -13,21 +14,25 @@ interface CTABandProps extends React.ComponentProps<"section"> {
 }
 
 function CTABand({
-  title = "Ready to get your next campaign in the mail?",
-  subtitle = "Tell us about the job — print, data, postage — and we'll come back with a quote, usually within one business day.",
-  buttonText = "Request a Quote",
-  buttonHref = "/contact",
+  title = ctaBandCopy.title,
+  subtitle = ctaBandCopy.subtitle,
+  buttonText = ctaBandCopy.buttonText,
+  buttonHref = ctaBandCopy.buttonHref,
   className,
   ...props
 }: CTABandProps) {
+  // `bg-growth-deep`, not `bg-growth`. On #16a34a the supporting line at
+  // white/85 measures 2.78:1 and full white only 3.30:1 — both under AA. On
+  // #15803d full white is 5.02:1, so the band darkens slightly and the
+  // supporting line goes to full white rather than 85%.
   return (
-    <section className={cn("bg-growth py-20", className)} {...props}>
+    <section className={cn("bg-growth-deep py-20", className)} {...props}>
       <Container className="flex flex-col items-center text-center">
         {/* Explicit colours: the band is green, so neither surface applies. */}
         <h2 className="max-w-3xl text-white">{title}</h2>
 
         {subtitle ? (
-          <p className="mt-6 max-w-2xl text-lg text-white/85">{subtitle}</p>
+          <p className="mt-6 max-w-2xl text-lg text-white">{subtitle}</p>
         ) : null}
 
         <Button
@@ -38,7 +43,7 @@ function CTABand({
           <Link href={buttonHref}>{buttonText}</Link>
         </Button>
 
-        <p className="mt-6 text-base text-white/85">
+        <p className="mt-6 text-base text-white">
           or call{" "}
           <a
             href={site.phone.href}

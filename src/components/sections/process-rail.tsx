@@ -14,6 +14,7 @@ import { Container } from "@/components/ui/container";
 import { EASE_ENGINEERED, VIEWPORT } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
+import { processRailCopy } from "@/data/copy";
 
 export interface ProcessStep {
   label: string;
@@ -67,7 +68,7 @@ interface ProcessRailProps {
  * Because the two are pinned to one duration constant, they cannot drift.
  */
 function ProcessRail({
-  title = "From Your Data to Their Mailbox",
+  title = processRailCopy.title,
   steps = PROCESS_STEPS,
   className,
 }: ProcessRailProps) {
@@ -157,7 +158,7 @@ function ProcessRail({
                   >
                     {/* Desktop only: the icon sits above the circle. */}
                     <Icon
-                      className="mb-4 hidden size-6 text-growth md:block"
+                      className="mb-4 hidden size-6 text-growth-text md:block"
                       aria-hidden="true"
                     />
                     {/* `bg-ink` masks the track running behind the circle. */}
@@ -170,7 +171,7 @@ function ProcessRail({
                     <h3 className="flex items-center gap-2 text-lg md:justify-center">
                       {/* Mobile only: the icon moves inline with the label. */}
                       <Icon
-                        className="size-5 shrink-0 text-growth md:hidden"
+                        className="size-5 shrink-0 text-growth-text md:hidden"
                         aria-hidden="true"
                       />
                       {step.label}

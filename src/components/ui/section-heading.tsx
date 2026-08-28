@@ -28,7 +28,7 @@ function SectionHeading({
       {...props}
     >
       {eyebrow ? (
-        <p className="font-heading text-xs font-semibold tracking-[0.1em] text-growth uppercase">
+        <p className="font-heading text-xs font-semibold tracking-[0.1em] text-growth-text uppercase">
           {eyebrow}
         </p>
       ) : null}

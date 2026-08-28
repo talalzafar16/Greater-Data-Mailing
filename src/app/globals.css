@@ -10,14 +10,34 @@
 --------------------------------------------------------------------------- */
 :root {
   --ink: #0d1b2a; /* navy — primary, dark sections, headings */
-  --growth: #16a34a; /* green — accent, CTAs, highlights */
+  --growth: #16a34a; /* green — decorative fills, tints, borders, rails */
   --paper: #f8f6f2; /* alternating section backgrounds */
   --white: #ffffff; /* cards */
-  --slate: #64748b; /* body text */
+  --slate: #5f6e85; /* body text — see contrast note below */
   --line: #e2e8f0; /* borders */
 
-  /* Interaction states: 8% darker on hover, per the button spec. */
-  --growth-hover: color-mix(in oklch, var(--growth), black 8%);
+  /*
+    WCAG AA corrections. Measured, not estimated:
+
+    - `slate` was #64748b, which is 4.41:1 on paper — under the 4.5:1 floor for
+      normal text. #5f6e85 measures 4.80:1 on paper and 5.18:1 on white.
+
+    - `growth` #16a34a is only 3.30:1 against white and 3.05:1 against paper, so
+      it cannot carry small text on a light surface, and white text cannot sit
+      on it (also 3.30:1 — this affected the primary button). `--growth-deep`
+      is 5.02:1 both ways. It is used for green text on light backgrounds and
+      for any green fill carrying white text.
+
+    - On navy the relationship inverts: #16a34a is 5.28:1 on ink while
+      `--growth-deep` is only 3.47:1. So green *text* is surface-aware —
+      `--growth-text` below — while decorative fills stay `--growth`.
+  */
+  --growth-deep: #15803d;
+  --growth-deep-hover: color-mix(in oklch, var(--growth-deep), black 8%);
+
+  /* Green text colour, redefined per surface by `.on-ink` / `.on-light`. */
+  --growth-text: var(--growth-deep);
+
   --ink-hover: color-mix(in oklch, var(--ink), black 8%);
 
   /*
@@ -105,7 +125,10 @@
   --color-ink: var(--ink);
   --color-ink-hover: var(--ink-hover);
   --color-growth: var(--growth);
-  --color-growth-hover: var(--growth-hover);
+  --color-growth-deep: var(--growth-deep);
+  --color-growth-deep-hover: var(--growth-deep-hover);
+  /* `text-growth-text` follows the surface; `bg-growth` etc. do not. */
+  --color-growth-text: var(--growth-text);
   --color-paper: var(--paper);
   --color-white: var(--white);
   --color-slate: var(--slate);
@@ -238,12 +261,15 @@
   .on-ink {
     --heading-color: var(--white);
     --body-color: color-mix(in oklab, var(--white) 70%, transparent);
+    /* 5.28:1 on navy; the deep green would drop to 3.47:1 here. */
+    --growth-text: var(--growth);
     color: var(--body-color);
   }
 
   .on-light {
     --heading-color: var(--ink);
     --body-color: var(--slate);
+    --growth-text: var(--growth-deep);
     color: var(--body-color);
   }
 
@@ -302,5 +328,26 @@
 
   @media (width >= 48rem) {
     padding-block: --spacing(24); /* 96px */
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Focus
+
+   Deliberately UNLAYERED. Cascade layers outrank specificity, so a rule inside
+   `@layer base` would lose to Tailwind's `outline-none` utility — which several
+   shadcn components apply — no matter how specific it was. Unlayered styles beat
+   every layer, so this guarantees one consistent, visible focus ring on every
+   interactive element in the app.
+--------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--growth-deep);
+  outline-offset: 2px;
+  border-radius: var(--radius-button);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :focus-visible {
+    transition: none;
   }
 }

@@ -3,6 +3,7 @@ import { FeatureCard } from "@/components/ui/feature-card";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { featuredServices, serviceHref } from "@/data/services";
+import { servicesTrioCopy } from "@/data/copy";
 
 function ServicesTrio() {
   const services = featuredServices();
@@ -10,9 +11,9 @@ function ServicesTrio() {
   return (
     <Section variant="white">
       <SectionHeading
-        eyebrow="What We Do"
-        title="Everything your mailing needs, in one building."
-        subtitle="No brokers, no handoffs, no surprises. The same team that cleans your list runs the press and drops the mail."
+        eyebrow={servicesTrioCopy.eyebrow}
+        title={servicesTrioCopy.title}
+        subtitle={servicesTrioCopy.subtitle}
       />
 
       <FadeInStagger className="mt-16 grid gap-8 md:grid-cols-3">
@@ -24,7 +25,7 @@ function ServicesTrio() {
               icon={service.icon}
               title={service.cardTitle}
               description={service.summary}
-              link={{ label: "Learn more", href: serviceHref(service) }}
+              link={{ label: servicesTrioCopy.cardLinkLabel, href: serviceHref(service) }}
               className="w-full"
             />
           </FadeIn>

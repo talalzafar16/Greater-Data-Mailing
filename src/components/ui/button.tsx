@@ -21,14 +21,22 @@ const buttonVariants = cva(
         "icon-lg": "size-14",
       },
       variant: {
-        /** Growth green fill — the primary call to action. */
+        /**
+         * Growth green fill. Uses `--growth-deep`, not `--growth`: white text
+         * on #16a34a measures 3.30:1, under the AA floor. #15803d is 5.02:1.
+         */
         primary:
-          "bg-growth text-white hover:bg-growth-hover hover:-translate-y-px hover:shadow-lift-sm",
+          "bg-growth-deep text-white hover:bg-growth-deep-hover hover:-translate-y-px hover:shadow-lift-sm",
         /** Navy outline on a transparent fill; hover floods navy. */
         secondary:
           "border-ink bg-transparent text-ink hover:bg-ink hover:text-white aria-expanded:bg-ink aria-expanded:text-white",
-        /** Green text; any icon child slides 4px right on hover. */
-        link: "h-auto gap-2 rounded-none p-0 text-base text-growth hover:text-growth-hover [&_svg]:transition-transform [&_svg]:duration-200 hover:[&_svg]:translate-x-1",
+        /**
+         * Green text; any icon child slides 4px right on hover. The colour is
+         * surface-aware via `--growth-text`, so it stays legible on white,
+         * paper and ink alike. The arrow slide is the hover affordance, so no
+         * colour shift is needed on top of it.
+         */
+        link: "h-auto gap-2 rounded-none p-0 text-base text-growth-text [&_svg]:transition-transform [&_svg]:duration-200 hover:[&_svg]:translate-x-1 hover:underline underline-offset-4",
         outline:
           "border-border bg-background text-ink hover:border-ink/20 hover:bg-paper aria-expanded:bg-paper",
         ghost:

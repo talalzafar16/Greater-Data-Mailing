@@ -37,7 +37,7 @@ function Header() {
         <div className="hidden items-center gap-6 lg:flex">
           <a
             href={site.phone.href}
-            className="flex items-center gap-2 text-[15px] font-medium text-ink transition-colors hover:text-growth"
+            className="flex items-center gap-2 text-[15px] font-medium text-ink transition-colors hover:text-growth-text"
           >
             <Phone className="size-4" aria-hidden="true" />
             {site.phone.label}

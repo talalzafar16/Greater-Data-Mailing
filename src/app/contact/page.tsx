@@ -1,25 +1,23 @@
 import type { Metadata } from "next";
 
+import { buildMetadata } from "@/lib/metadata";
+
 import { Container } from "@/components/ui/container";
 import { FadeIn } from "@/components/ui/fade-in";
 import { ContactInfo } from "@/components/sections/contact-info";
 import { QuoteForm } from "@/components/sections/quote-form";
+import { contactCopy } from "@/data/copy";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Get a quote on your next mailing. Tell us about the project and we'll respond within one business day with pricing and recommendations.",
-};
+export const metadata: Metadata = buildMetadata("/contact");
 
 export default function ContactPage() {
   return (
     <main className="on-light bg-paper">
       <Container className="py-16 md:py-24">
         <FadeIn className="max-w-3xl">
-          <h1>Get a quote on your next mailing.</h1>
+          <h1>{contactCopy.title}</h1>
           <p className="mt-6 text-xl">
-            Tell us a little about the project. We&rsquo;ll respond within one
-            business day with pricing and recommendations.
+            {contactCopy.subtitle}
           </p>
         </FadeIn>
 

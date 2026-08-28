@@ -1,11 +1,7 @@
 import { Container } from "@/components/ui/container";
+import { trustBarCopy } from "@/data/copy";
 
-const TRUST_POINTS = [
-  "38+ Years Experience",
-  "USPS Automation Certified",
-  "In-House Printing & Mailing",
-  "Long Island Based",
-];
+
 
 function TrustBar() {
   return (
@@ -16,7 +12,7 @@ function TrustBar() {
           separators from `lg` up, where four items fit comfortably.
         */}
         <ul className="grid grid-cols-2 gap-x-6 gap-y-4 lg:flex lg:items-center lg:justify-center lg:gap-0">
-          {TRUST_POINTS.map((point, index) => (
+          {trustBarCopy.points.map((point, index) => (
             <li key={point} className="flex items-center justify-center">
               {index > 0 ? (
                 <span

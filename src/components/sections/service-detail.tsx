@@ -11,6 +11,7 @@ import { PageHero } from "./page-hero";
 import { ProcessRail } from "./process-rail";
 import { industries } from "@/data/industries";
 import type { Service } from "@/data/services";
+import { serviceDetailCopy } from "@/data/copy";
 
 type SurfaceVariant = "white" | "paper";
 
@@ -23,7 +24,7 @@ function WhatItIs({
 }) {
   return (
     <Section variant={variant}>
-      <SectionHeading title="What it is" />
+      <SectionHeading title={serviceDetailCopy.whatItIsHeading} />
       <div className="mt-8 flex max-w-[65ch] flex-col gap-6">
         {service.whatItIs.map((paragraph) => (
           <FadeIn key={paragraph.slice(0, 40)}>
@@ -44,7 +45,7 @@ function WhatsIncluded({
 }) {
   return (
     <Section variant={variant}>
-      <SectionHeading title="What's included" />
+      <SectionHeading title={serviceDetailCopy.includedHeading} />
       <FadeInStagger
         role="list"
         className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-x-12"
@@ -56,7 +57,7 @@ function WhatsIncluded({
             className="flex items-start gap-3 text-base"
           >
             <Check
-              className="mt-1.5 size-4 shrink-0 text-growth"
+              className="mt-1.5 size-4 shrink-0 text-growth-text"
               strokeWidth={3}
               aria-hidden="true"
             />
@@ -83,7 +84,7 @@ function Capabilities({
 
   return (
     <Section variant={variant}>
-      <SectionHeading title="Capabilities" />
+      <SectionHeading title={serviceDetailCopy.capabilitiesHeading} />
 
       {/*
         A description list rather than a <table>: these are term/definition
@@ -172,15 +173,12 @@ function ServiceDetail({ service }: { service: Service }) {
       <ProcessRail />
 
       <IndustriesStrip
-        eyebrow="Who We Work With"
+        eyebrow={serviceDetailCopy.relatedEyebrow}
         title={`${service.title} for teams like yours.`}
         items={related}
       />
 
-      <CTABand
-        title="Let's talk about your next mailing."
-        subtitle="Tell us what you're sending and we'll come back with pricing and a plan."
-      />
+      <CTABand />
     </main>
   );
 }

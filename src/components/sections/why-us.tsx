@@ -4,28 +4,10 @@ import { FadeIn, FadeInStagger } from "@/components/ui/fade-in";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { whyUsCopy } from "@/data/copy";
 
-const REASONS = [
-  {
-    title: "Lower postal rates.",
-    body: "We make sure your list is clean and accurate so your mail qualifies for the deepest postal discounts available.",
-  },
-  {
-    title: "One team, start to finish.",
-    body: "Your job never leaves our building or gets passed to a third party.",
-  },
-  {
-    title: "38 years of hands-on experience.",
-    body: "Our president has mastered every process on the floor personally.",
-  },
-  {
-    title: "No job too small or too large.",
-    body: "From a 500-piece local drop to a multi-million-piece campaign.",
-  },
-];
 
-const IMAGE_ALT =
-  "Greater Data & Mailing team member inspecting a mail piece on the production line.";
+
 
 function WhyUs() {
   return (
@@ -39,7 +21,7 @@ function WhyUs() {
               className="absolute inset-0 translate-x-2 translate-y-2 rounded-2xl border-2 border-growth"
             />
             <ImagePlaceholder
-              alt={IMAGE_ALT}
+              alt={whyUsCopy.imageAlt}
               className="relative aspect-square w-full rounded-2xl"
             />
           </div>
@@ -48,8 +30,8 @@ function WhyUs() {
         <div className="lg:col-span-7">
           <FadeIn>
             <SectionHeading
-              eyebrow="Why Greater Data"
-              title="A first-class mailing every single time."
+              eyebrow={whyUsCopy.eyebrow}
+              title={whyUsCopy.title}
             />
           </FadeIn>
 
@@ -59,11 +41,11 @@ function WhyUs() {
             without needing an `as` prop on the motion primitive.
           */}
           <FadeInStagger role="list" className="mt-10 flex flex-col gap-6">
-            {REASONS.map((reason) => (
+            {whyUsCopy.reasons.map((reason) => (
               <FadeIn key={reason.title} role="listitem" className="flex gap-4">
                 <span
                   aria-hidden="true"
-                  className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-growth/10 text-growth"
+                  className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-growth/10 text-growth-text"
                 >
                   <Check className="size-3.5" strokeWidth={3} />
                 </span>

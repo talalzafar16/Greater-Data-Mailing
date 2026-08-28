@@ -44,7 +44,7 @@ function Testimonials({
 
       <div className="relative mx-auto mt-16 max-w-3xl text-center">
         <Quote
-          className="mx-auto size-10 text-growth/25"
+          className="mx-auto size-10 text-growth-text/25"
           aria-hidden="true"
         />
 

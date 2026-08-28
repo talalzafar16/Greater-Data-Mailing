@@ -35,11 +35,11 @@ function PageHero({
         {breadcrumb && breadcrumb.length > 0 ? (
           <FadeIn>
             <nav aria-label="Breadcrumb">
-              <ol className="flex flex-wrap items-center gap-2 text-[13px] text-growth">
+              <ol className="flex flex-wrap items-center gap-2 text-[13px] text-growth-text">
                 {breadcrumb.map((crumb, index) => (
                   <li key={crumb.label} className="flex items-center gap-2">
                     {index > 0 ? (
-                      <span aria-hidden="true" className="text-growth/50">
+                      <span aria-hidden="true" className="text-growth-text/50">
                         /
                       </span>
                     ) : null}

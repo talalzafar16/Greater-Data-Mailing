@@ -28,7 +28,7 @@ function StatsBand() {
             >
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <span className="block font-heading text-[56px] leading-none font-bold text-growth">
+                <span className="block font-heading text-[56px] leading-none font-bold text-growth-text">
                   <AnimatedCounter
                     value={stat.value}
                     prefix={stat.prefix}

@@ -157,7 +157,7 @@ function StepProgress({ current }: { current: number }) {
                 className={cn(
                   "flex size-8 shrink-0 items-center justify-center rounded-full border text-sm font-medium transition-colors duration-300",
                   complete && "border-growth bg-growth text-white",
-                  active && !complete && "border-growth text-growth",
+                  active && !complete && "border-growth text-growth-text",
                   !complete && !active && "border-border text-slate"
                 )}
               >
@@ -313,7 +313,7 @@ function QuoteForm() {
           If it&rsquo;s urgent, call us directly at{" "}
           <a
             href={site.phone.href}
-            className="font-medium text-growth underline underline-offset-4"
+            className="font-medium text-growth-text underline underline-offset-4"
           >
             {site.phone.label}
           </a>
@@ -363,7 +363,9 @@ function QuoteForm() {
                 value={option}
                 checked={selected}
                 onChange={() => setField("projectType", option)}
-                aria-invalid={errors.projectType ? true : undefined}
+                // No `aria-invalid` here: the radio role does not support it.
+                // The group's error is announced via `aria-describedby` on the
+                // fieldset instead.
                 className="sr-only"
               />
               {/* Custom control — the real radio stays in the a11y tree. */}

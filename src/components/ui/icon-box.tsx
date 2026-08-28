@@ -13,7 +13,7 @@ function IconBox({ icon: Icon, className, ...props }: IconBoxProps) {
     <div
       data-slot="icon-box"
       className={cn(
-        "flex size-12 shrink-0 items-center justify-center rounded-xl bg-growth/10 text-growth",
+        "flex size-12 shrink-0 items-center justify-center rounded-xl bg-growth/10 text-growth-text",
         className
       )}
       {...props}

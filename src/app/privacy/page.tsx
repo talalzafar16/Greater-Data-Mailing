@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { buildMetadata } from "@/lib/metadata";
 import Link from "next/link";
 
 import { FadeIn } from "@/components/ui/fade-in";
@@ -30,10 +32,7 @@ import { formattedAddress, site } from "@/data/site";
 // TODO: set to the date the reviewed policy is published
 const EFFECTIVE_DATE = "August 28, 2026";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: `How ${site.name} collects, uses, and protects information submitted through this site and the mailing data our clients entrust to us.`,
-};
+export const metadata: Metadata = buildMetadata("/privacy");
 
 interface PolicySection {
   heading: string;
@@ -230,14 +229,14 @@ export default function PrivacyPage() {
                   <br />
                   <a
                     href={site.phone.href}
-                    className="text-growth underline underline-offset-4"
+                    className="text-growth-text underline underline-offset-4"
                   >
                     {site.phone.label}
                   </a>
                   <br />
                   <a
                     href={site.emailHref}
-                    className="text-growth underline underline-offset-4"
+                    className="text-growth-text underline underline-offset-4"
                   >
                     {site.email}
                   </a>
@@ -250,7 +249,7 @@ export default function PrivacyPage() {
             Looking for something else?{" "}
             <Link
               href="/contact"
-              className="text-growth underline underline-offset-4"
+              className="text-growth-text underline underline-offset-4"
             >
               Get in touch
             </Link>

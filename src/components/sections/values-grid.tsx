@@ -4,6 +4,7 @@ import { FadeIn, FadeInStagger } from "@/components/ui/fade-in";
 import { IconBox } from "@/components/ui/icon-box";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { aboutCopy } from "@/data/copy";
 
 const VALUES = [
   {
@@ -32,8 +33,8 @@ function ValuesGrid() {
   return (
     <Section variant="paper">
       <SectionHeading
-        eyebrow="What We Stand For"
-        title="Four things we hold ourselves to."
+        eyebrow={aboutCopy.valuesEyebrow}
+        title={aboutCopy.valuesTitle}
       />
 
       <FadeInStagger

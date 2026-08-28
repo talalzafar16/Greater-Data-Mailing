@@ -4,6 +4,7 @@ import { FadeIn, FadeInStagger } from "@/components/ui/fade-in";
 import { IconBox } from "@/components/ui/icon-box";
 import { Section } from "@/components/ui/section";
 import { industries } from "@/data/industries";
+import { industriesCopy } from "@/data/copy";
 
 /**
  * The detailed two-column industry cards on /industries.
@@ -39,7 +40,7 @@ function IndustryCards() {
               {industry.pieces?.length ? (
                 <>
                   <h3 className="mt-8 font-heading text-xs font-semibold tracking-[0.1em] text-slate uppercase">
-                    Typical pieces
+                    {industriesCopy.piecesHeading}
                   </h3>
                   <ul className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
                     {industry.pieces.map((piece) => (
@@ -48,7 +49,7 @@ function IndustryCards() {
                         className="flex items-start gap-2 text-base"
                       >
                         <Check
-                          className="mt-1.5 size-4 shrink-0 text-growth"
+                          className="mt-1.5 size-4 shrink-0 text-growth-text"
                           strokeWidth={3}
                           aria-hidden="true"
                         />

@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
 import { industries, type Industry } from "@/data/industries";
+import { industriesCopy } from "@/data/copy";
 
 interface IndustriesStripProps {
   eyebrow?: string;
@@ -16,8 +17,8 @@ interface IndustriesStripProps {
 }
 
 function IndustriesStrip({
-  eyebrow = "Who We Work With",
-  title = "Built for the industries that live on the mail.",
+  eyebrow = industriesCopy.eyebrow,
+  title = industriesCopy.title,
   items = industries,
   variant = "paper",
 }: IndustriesStripProps) {
@@ -44,7 +45,7 @@ function IndustriesStrip({
                   "group flex w-full flex-col p-6 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
                 )}
               >
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-growth/10 text-growth">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-growth/10 text-growth-text">
                   <Icon className="size-6" aria-hidden="true" />
                 </span>
 

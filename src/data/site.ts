@@ -26,6 +26,8 @@ export interface SiteConfig {
   /** Short capability line shown beside the logo. */
   descriptor: string;
   tagline: string;
+  /** Absolute production origin, no trailing slash. */
+  url: string;
   address: PostalAddress;
   phone: PhoneNumber;
   cell: PhoneNumber;
@@ -37,6 +39,15 @@ export const site: SiteConfig = {
   name: "Greater Data & Mailing",
   descriptor: "Print · Mail · Data",
   tagline: "Data-driven direct mail, printed and mailed under one roof.",
+  /*
+    TODO: confirm the production domain with the client.
+
+    Inferred from the info@GreaterData.com address, not verified. This value
+    becomes every canonical URL, every sitemap entry, and the og:url on every
+    share — a wrong guess is worse than an obvious placeholder, so set
+    NEXT_PUBLIC_SITE_URL in the deploy environment to override it.
+  */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.greaterdata.com",
   address: {
     street: "551 Acorn Street",
     city: "Deer Park",

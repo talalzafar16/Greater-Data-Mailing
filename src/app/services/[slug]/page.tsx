@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ServiceDetail } from "@/components/sections/service-detail";
+import { buildMetadata } from "@/lib/metadata";
+import type { PageSeoKey } from "@/data/seo";
 import { getService, services } from "@/data/services";
 
 /** Prerender all four service pages at build time. */
@@ -17,10 +19,8 @@ export async function generateMetadata({
 
   if (!service) return {};
 
-  return {
-    title: service.title,
-    description: service.promise,
-  };
+  // Each service page has its own entry in `seo.ts`, keyed by route.
+  return buildMetadata(`/services/${service.slug}` as PageSeoKey);
 }
 
 export default async function ServicePage({

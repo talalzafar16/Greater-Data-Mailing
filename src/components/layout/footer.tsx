@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 
@@ -54,6 +55,24 @@ function Footer() {
       <Container className="py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col">
+            {/*
+              Stacked rather than inline as in the header: this column is a
+              quarter width, so a side-by-side lockup would wrap the name.
+
+              `self-start` is load-bearing. The parent is `flex flex-col`, so
+              the default `align-items: stretch` pulls the image to the full
+              column width on the cross axis and `w-auto` cannot stop it —
+              which stretched the mark to 272x48 against its natural 1.465
+              ratio. The header escapes this only because it is a row with
+              `items-center`.
+            */}
+            <Image
+              src="/logo-mark.png"
+              alt=""
+              width={400}
+              height={273}
+              className="mb-4 h-12 w-auto self-start"
+            />
             <p className="font-heading text-lg font-bold tracking-tight text-white">
               {site.name}
             </p>
@@ -69,11 +88,6 @@ function Footer() {
               <a href={site.phone.href} className={`flex items-center gap-2 ${linkClass}`}>
                 <Phone className="size-4 shrink-0" aria-hidden="true" />
                 {site.phone.label}
-              </a>
-              <a href={site.cell.href} className={`flex items-center gap-2 ${linkClass}`}>
-                <Phone className="size-4 shrink-0" aria-hidden="true" />
-                {site.cell.label}
-                <span className="text-[13px] opacity-70">(cell)</span>
               </a>
               <a href={site.emailHref} className={`flex items-center gap-2 ${linkClass}`}>
                 <Mail className="size-4 shrink-0" aria-hidden="true" />

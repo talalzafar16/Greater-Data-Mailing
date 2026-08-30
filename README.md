@@ -41,8 +41,9 @@ Copy `.env.example` to `.env.local`. Two variables:
 
 Powers the quote form on `/contact`.
 
-1. Go to <https://web3forms.com>, enter the address submissions should be
-   emailed to, and they send you an access key.
+1. Go to <https://web3forms.com> and register with **sl@greaterdata.com** —
+   the client asked for quote requests to be delivered there. They send you an
+   access key. The destination lives in their dashboard, not this repo.
 2. Put it in `.env.local`, and add it to the Vercel project's environment
    variables for Production, Preview, and Development.
 3. In the Web3Forms dashboard, restrict allowed domains and enable spam
@@ -60,8 +61,9 @@ the visitor to call instead. It never fails silently.
 The production origin, no trailing slash — e.g. `https://www.greaterdata.com`.
 
 It drives every canonical URL, the sitemap, `robots.txt`, and Open Graph tags.
-**The fallback in `src/data/site.ts` was inferred from the company's email
-domain and has not been confirmed.** Set this explicitly before launch.
+The client confirmed **www.greaterdata.com**, which is also the fallback in
+`src/data/site.ts`. Set it explicitly on Vercel Production anyway, and leave it
+unset on Preview so preview builds do not emit production canonicals.
 
 ---
 
@@ -123,7 +125,7 @@ change wording.
 
 | File | Contains |
 | --- | --- |
-| `site.ts` | NAP: name, address, phone, cell, email, production URL |
+| `site.ts` | NAP: name, address, phone, email, production URL |
 | `copy.ts` | Section headings, body copy, CTA labels, image alt text |
 | `seo.ts` | Per-page `<title>` and meta description |
 | `services.ts` | The four services — powers the hub, sub-pages, header dropdown, homepage trio |
@@ -142,10 +144,9 @@ change wording.
 view. `prefix` and `suffix` are the non-numeric parts (`"$"`, `"%"`, `"M"`,
 `"+"`). Keep them separate — putting `"38+"` in `value` breaks the count-up.
 
-> **All four numbers are unverified placeholders** and carry
-> `// TODO: confirm real numbers with client`. "22% Average Postage Savings"
-> and "12M Pieces Mailed Annually" are claims the client can be held to.
-> Confirm them before launch, and delete the TODOs once you have.
+> All four numbers were **confirmed by the client (Aug 2026)**. They are still
+> claims the business can be held to, so re-confirm before reusing them in paid
+> advertising.
 
 ### Testimonials — `src/data/testimonials.ts`
 
@@ -182,9 +183,9 @@ testimonials would ship as fabricated endorsements.
 
 `contactCopy.hours` in `src/data/copy.ts`, plus the
 `openingHoursSpecification` block in
-`src/components/layout/structured-data.tsx`. **Both are unconfirmed.** The
-structured-data copy feeds Google's knowledge panel, where people act on it and
-turn up at the door — treat a correction there as urgent.
+`src/components/layout/structured-data.tsx`. Both are confirmed (Mon–Fri
+8:30am–5:00pm). **Change both together** — the structured-data copy feeds
+Google's knowledge panel, where people act on it and turn up at the door.
 
 ---
 
@@ -214,22 +215,32 @@ configure and the free tier is sufficient.
 
 ## Before launch
 
-- [ ] Confirm the production domain and set `NEXT_PUBLIC_SITE_URL`
-- [ ] Set `NEXT_PUBLIC_WEB3FORMS_KEY` and test a real submission
-- [ ] Confirm the four numbers in `stats.ts`
-- [ ] Confirm business hours (`copy.ts` **and** `structured-data.tsx`)
-- [ ] Geocode 551 Acorn Street and replace the approximate `geo` coordinates in
-      `structured-data.tsx` — they are Deer Park village centre, not the building
-- [ ] **Have an attorney review `/privacy`**, and have the client confirm its
-      factual claims about list handling. See the comment block at the top of
-      `src/app/privacy/page.tsx`
+Confirmed by the client (Aug 2026): domain, phone, email, the four stat
+numbers, business hours, the address, and that there are **no social profiles**
+and **the cell number must not be published** (it has been removed from the
+site).
+
+Still outstanding:
+
+- [ ] Sign up for Web3Forms using **sl@greaterdata.com** as the destination,
+      set `NEXT_PUBLIC_WEB3FORMS_KEY`, and test a real submission
+- [ ] Set `NEXT_PUBLIC_SITE_URL` to `https://www.greaterdata.com` in Vercel
+      (Production only)
+- [ ] **Privacy policy** — client wants to discuss; still needs an attorney and
+      confirmation of its claims about list handling. See the comment block at
+      the top of `src/app/privacy/page.tsx`
+- [ ] Seven photographs (client is sourcing) — see the table above
+- [ ] Logo asset (client sending) — the header/footer currently render a styled
+      text lockup, not an image
+- [ ] Testimonials (client can obtain) — section stays hidden until
+      `src/data/testimonials.ts` has entries
+- [ ] Replace the favicon — still the Next.js default
+- [ ] Add an Open Graph share image — link previews have no image
 - [ ] Client review of the drafted copy: the `whatItIs` paragraphs in
       `services.ts` and the `description` / `pieces` in `industries.ts`
-- [ ] Supply the seven photographs above
-- [ ] Add an Open Graph share image (`src/app/opengraph-image.tsx` or a static
-      file) — link previews currently have no image
-
----
+- [ ] *Nice to have:* spot-check the `geo` coordinates in
+      `structured-data.tsx` against the pin in Google Maps. They were geocoded
+      from the confirmed street address rather than read off a map
 
 ## Notes for developers
 

@@ -3,7 +3,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  Smartphone,
   type LucideIcon,
 } from "lucide-react";
 
@@ -57,12 +56,6 @@ function ContactInfo() {
           <InfoRow icon={Phone} label="Phone">
             <a href={site.phone.href} className={linkClass}>
               {site.phone.label}
-            </a>
-          </InfoRow>
-
-          <InfoRow icon={Smartphone} label="Cell">
-            <a href={site.cell.href} className={linkClass}>
-              {site.cell.label}
             </a>
           </InfoRow>
 

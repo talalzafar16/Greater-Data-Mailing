@@ -134,7 +134,7 @@ export const contactCopy = {
   subtitle:
     "Tell us a little about the project. We'll respond within one business day with pricing and recommendations.",
   infoHeading: "Reach us directly",
-  // TODO: confirm hours with client
+  // Confirmed by the client.
   hours: "Monday – Friday, 8:30am – 5:00pm",
   calloutPrefix: "Prefer to talk it through? Call",
 };

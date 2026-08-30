@@ -1,10 +1,9 @@
 /**
  * Proof-point numbers for the stats band.
  *
- * TODO: confirm real numbers with client. These are placeholders drawn from
- * marketing copy, not from production reporting — every figure below needs to
- * be verified before this site goes live. Postage savings and annual volume in
- * particular are claims a client can be held to.
+ * Confirmed by the client (Aug 2026). Re-confirm before reusing these in paid
+ * advertising — postage savings and annual volume are claims that can be held
+ * against the business.
  */
 
 export interface Stat {
@@ -20,12 +19,8 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-  // TODO: confirm real numbers with client
   { value: 38, suffix: "+", label: "Years in Business" },
-  // TODO: confirm real numbers with client
   { value: 12, suffix: "M", label: "Pieces Mailed Annually" },
-  // TODO: confirm real numbers with client
   { value: 22, suffix: "%", label: "Average Postage Savings" },
-  // TODO: confirm real numbers with client
   { value: 5, label: "Day Standard Turnaround" },
 ];

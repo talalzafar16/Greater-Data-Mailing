@@ -30,6 +30,7 @@ export interface SiteConfig {
   url: string;
   address: PostalAddress;
   phone: PhoneNumber;
+  /** Kept for reference — the client asked that it NOT be published. */
   cell: PhoneNumber;
   email: string;
   emailHref: string;
@@ -40,12 +41,8 @@ export const site: SiteConfig = {
   descriptor: "Print · Mail · Data",
   tagline: "Data-driven direct mail, printed and mailed under one roof.",
   /*
-    TODO: confirm the production domain with the client.
-
-    Inferred from the info@GreaterData.com address, not verified. This value
-    becomes every canonical URL, every sitemap entry, and the og:url on every
-    share — a wrong guess is worse than an obvious placeholder, so set
-    NEXT_PUBLIC_SITE_URL in the deploy environment to override it.
+    Confirmed by the client: www.greaterdata.com. Still overridable via
+    NEXT_PUBLIC_SITE_URL so preview deploys can point somewhere else.
   */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.greaterdata.com",
   address: {
@@ -63,8 +60,8 @@ export const site: SiteConfig = {
     label: "(631) 704-0803",
     href: "tel:+16317040803",
   },
-  email: "info@GreaterData.com",
-  emailHref: "mailto:info@GreaterData.com",
+  email: "info@greaterdata.com",
+  emailHref: "mailto:info@greaterdata.com",
 };
 
 /** One-line address, e.g. for footers and meta tags. */

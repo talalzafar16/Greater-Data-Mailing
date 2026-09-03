@@ -1,10 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { FadeIn } from "@/components/ui/fade-in";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { heroCopy } from "@/data/copy";
 import { HeroVisual } from "./hero-visual";
 
@@ -88,9 +88,19 @@ function Hero() {
         <div className="lg:col-span-5">
           <div className="relative mx-auto max-w-md lg:mr-0">
             <HeroVisual>
-              <ImagePlaceholder
+              {/*
+                The file is already cropped 4:5, so `object-cover` only guards
+                against a future swap at a different ratio. `priority` because
+                this is the largest above-the-fold paint.
+              */}
+              <Image
+                src={heroCopy.image}
                 alt={heroCopy.imageAlt}
-                className="aspect-4/5 w-full rounded-2xl"
+                width={1000}
+                height={1250}
+                priority
+                sizes="(min-width: 640px) 28rem, 100vw"
+                className="aspect-4/5 w-full rounded-2xl object-cover"
               />
             </HeroVisual>
 

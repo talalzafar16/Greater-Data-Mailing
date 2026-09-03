@@ -20,8 +20,8 @@ export const heroCopy = {
     "USPS automation certified",
     "Family-run since day one",
   ],
-  imageAlt:
-    "Greater Data & Mailing production floor with high-speed press running",
+  image: "/photos/hero-press-running.jpg",
+  imageAlt: "High-speed press running a printed sheet through its rollers",
   stat: { value: "38+", label: "Years of Direct Mail Expertise" },
 };
 
@@ -49,8 +49,8 @@ export const processRailCopy = {
 export const whyUsCopy = {
   eyebrow: "Why Greater Data",
   title: "A first-class mailing every single time.",
-  imageAlt:
-    "Greater Data & Mailing team member inspecting a mail piece on the production line.",
+  image: "/photos/production-line-check.jpg",
+  imageAlt: "Press operator checking a job running on the production line",
   reasons: [
     {
       title: "Lower postal rates.",
@@ -104,8 +104,8 @@ export const aboutCopy = {
     "A full-service direct marketing company in Deer Park, New York — printing, mailing, and data under one roof.",
   storyEyebrow: "Who We Are",
   storyTitle: "A direct marketing company, not a print broker.",
-  storyImageAlt:
-    "Interior of the Greater Data & Mailing production plant in Deer Park, NY",
+  storyImage: "/photos/plant-interior.jpg",
+  storyImageAlt: "Production floor of a modern printing plant",
   story: [
     "Greater Data & Mailing is a full-service direct marketing company in Deer Park, New York. Walk into our plant and you'll see today's technology at work, run by people who have been doing this for decades. Our customer service and attention to detail are the reasons we've kept growing in a crowded marketplace.",
     "We give our team an environment that rewards good ideas, and many of those ideas have saved our customers real money in production costs. Your mailing is never just another job here. Every one is a chance to show you our best.",
@@ -121,11 +121,19 @@ export const aboutCopy = {
   valuesTitle: "Four things we hold ourselves to.",
   galleryEyebrow: "Inside the Plant",
   galleryTitle: "Everything happens in Deer Park.",
-  /** Each string is the brief for the photograph the client needs to supply. */
   galleryShots: [
-    "Press floor at Greater Data & Mailing with sheet fed and web presses running",
-    "High-speed inserting machines processing a matched mailing",
-    "Trays of finished mail sorted and staged for USPS pickup",
+    {
+      src: "/photos/gallery-press-floor.jpg",
+      alt: "Wide-format press running a printed sheet",
+    },
+    {
+      src: "/photos/gallery-inserting.jpg",
+      alt: "Printed sheets feeding through a finishing machine",
+    },
+    {
+      src: "/photos/gallery-finished-mail.jpg",
+      alt: "Envelopes stacked and staged for mailing",
+    },
   ],
 };
 

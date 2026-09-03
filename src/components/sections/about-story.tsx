@@ -1,5 +1,6 @@
+import Image from "next/image";
+
 import { FadeIn } from "@/components/ui/fade-in";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { aboutCopy } from "@/data/copy";
@@ -29,9 +30,13 @@ function AboutStory() {
         </div>
 
         <FadeIn delay={0.2} className="lg:col-span-5">
-          <ImagePlaceholder
+          <Image
+            src={aboutCopy.storyImage}
             alt={aboutCopy.storyImageAlt}
-            className="aspect-4/5 w-full rounded-2xl"
+            width={1000}
+            height={1250}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            className="aspect-4/5 w-full rounded-2xl object-cover"
           />
         </FadeIn>
       </div>

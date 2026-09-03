@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { Check } from "lucide-react";
 
 import { FadeIn, FadeInStagger } from "@/components/ui/fade-in";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { whyUsCopy } from "@/data/copy";
@@ -20,9 +20,13 @@ function WhyUs() {
               aria-hidden="true"
               className="absolute inset-0 translate-x-2 translate-y-2 rounded-2xl border-2 border-growth"
             />
-            <ImagePlaceholder
+            <Image
+              src={whyUsCopy.image}
               alt={whyUsCopy.imageAlt}
-              className="relative aspect-square w-full rounded-2xl"
+              width={1100}
+              height={1100}
+              sizes="(min-width: 1024px) 28rem, 100vw"
+              className="relative aspect-square w-full rounded-2xl object-cover"
             />
           </div>
         </FadeIn>

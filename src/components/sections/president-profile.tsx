@@ -3,8 +3,12 @@ import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Section } from "@/components/ui/section";
 import { aboutCopy } from "@/data/copy";
 
-
-
+/**
+ * The only remaining `ImagePlaceholder` on the site, and deliberately so: this
+ * slot names a real person, so stock photography of someone else would be a
+ * misrepresentation rather than a stand-in. It needs an actual headshot of
+ * Steven Loehr from the client before it can ship.
+ */
 function PresidentProfile() {
   return (
     <Section variant="white">

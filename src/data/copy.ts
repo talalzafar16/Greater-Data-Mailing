@@ -114,6 +114,7 @@ export const aboutCopy = {
   mission: "To create growth through marketing.",
   presidentName: "Steven Loehr",
   presidentRole: "President",
+  presidentImage: "/photos/president_pic.jpeg",
   presidentImageAlt: "Steven Loehr, President of Greater Data & Mailing",
   presidentBio:
     "Steven is a direct mail professional with more than 38 years of experience, having worked hands-on through every process along the way. He understands what efficient, quality-driven production takes: keeping costs under control while delivering a strong return. He works closely with employees, vendors, suppliers, and clients to keep communication accurate and expectations met, and stays current on the latest USPS technologies and innovations. No project is too small or too large.",

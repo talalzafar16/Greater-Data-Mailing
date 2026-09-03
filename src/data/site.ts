@@ -43,8 +43,14 @@ export const site: SiteConfig = {
   /*
     Confirmed by the client: www.greaterdata.com. Still overridable via
     NEXT_PUBLIC_SITE_URL so preview deploys can point somewhere else.
+
+    `||`, not `??`: a variable that is declared but left blank arrives as ""
+    rather than undefined, and `??` would let that through to
+    `new URL(site.url)` in app/layout.tsx — which throws and fails the build
+    with an error that names /_not-found instead of the empty variable.
+    Treat blank the same as unset.
   */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.greaterdata.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.greaterdata.com",
   address: {
     street: "551 Acorn Street",
     city: "Deer Park",

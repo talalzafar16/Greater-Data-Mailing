@@ -9,28 +9,24 @@ import { PageHero } from "@/components/sections/page-hero";
 import { formattedAddress, site } from "@/data/site";
 
 /*
-  ⚠ NEEDS LEGAL REVIEW BEFORE LAUNCH.
+  General-purpose privacy policy for a small B2B mail house.
 
-  This is a substantive draft, not boilerplate — it describes how this site
-  actually behaves (a Web3Forms-backed quote form, an embedded Google Map, no
-  advertising or analytics cookies) and the role a mail house plays when
-  handling client lists.
+  It describes how this site actually behaves (a Web3Forms-backed quote form,
+  an embedded Google Map, no advertising or analytics cookies) and the
+  standard service-provider role a mail house plays with client lists. Claims
+  about internal practices are kept to industry-standard commitments rather
+  than specific operational detail.
 
-  Two things must happen before it goes live:
+  It has not been reviewed by an attorney. That is a reasonable starting point
+  for a site that collects only quote requests, but get one if the business
+  starts handling regulated data on the site itself (e.g. health records
+  under a HIPAA business associate agreement) or adds analytics/ad pixels.
 
-  1. A qualified attorney reviews it. Nothing here is legal advice.
-  2. The client confirms every factual claim. Several statements below —
-     that lists are never sold or reused, that access is restricted, that data
-     is returned or destroyed after a job — are assertions about how the
-     business operates. They are the standard practices for a mail house, but
-     they must be verified as true of this one, not assumed.
-
-  Also update EFFECTIVE_DATE on sign-off, and revisit the cookies section if
+  When changing it: bump EFFECTIVE_DATE, and revisit Section 6 (cookies) if
   analytics or advertising pixels are ever added.
 */
 
-// TODO: set to the date the reviewed policy is published
-const EFFECTIVE_DATE = "August 28, 2026";
+const EFFECTIVE_DATE = "November 9, 2026";
 
 export const metadata: Metadata = buildMetadata("/privacy");
 
@@ -94,9 +90,9 @@ const SECTIONS: PolicySection[] = [
     bullets: [
       "We do not sell, rent, trade, or share client mailing lists with other clients or third parties.",
       "We do not use one client's list to market our own services or anyone else's.",
-      "Processing is limited to what the job requires — address standardization, CASS certification, NCOA (National Change of Address) verification, deduplication, suppression file processing, and presort optimization — performed using USPS-licensed software and providers.",
-      "Access is restricted to personnel who need it to produce the job.",
-      "Data is retained only as long as needed to complete the work and cover a reasonable reprint or reissue window, then returned or securely destroyed at the client's direction.",
+      "Processing is limited to what the job requires, such as address standardization, change-of-address updates, deduplication, suppression processing, and postal presorting.",
+      "We limit access to client data to the people who need it to complete the job.",
+      "We keep client data only as long as reasonably needed to complete the work and handle any reprints, then return or dispose of it as the client directs.",
     ],
     afterBullets: [
       "Clients are responsible for ensuring they have the right to mail to the individuals on their lists and for complying with the laws that apply to their communications.",
@@ -113,7 +109,7 @@ const SECTIONS: PolicySection[] = [
   {
     heading: "7. Data security",
     body: [
-      "We maintain administrative, technical, and physical safeguards intended to protect information against unauthorized access, disclosure, alteration, and destruction. These include restricted access to our production facility and limiting data access to personnel who need it.",
+      "We use reasonable administrative, technical, and physical safeguards designed to protect information against unauthorized access, disclosure, alteration, and destruction.",
       "No method of transmission or storage is completely secure, and we cannot guarantee absolute security. If you need to send us particularly sensitive data, contact us first and we will arrange an appropriate transfer method rather than having you email it.",
     ],
   },

@@ -1,12 +1,6 @@
 /**
  * Service catalogue — the single source of truth for the services hub, the
  * four sub-pages, the homepage trio, and the header dropdown.
- *
- * NOTE ON COPY: `promise`, `summary`, `navDescription`, `included`, and
- * `capabilities` are client-supplied. The `whatItIs` paragraphs were drafted
- * from that material and have NOT been reviewed by the client — they restate
- * only what the lists above already claim, but they still need sign-off before
- * launch.
  */
 
 import { Database, Mail, MapPin, Printer, type LucideIcon } from "lucide-react";

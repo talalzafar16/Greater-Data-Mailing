@@ -11,11 +11,10 @@ const MARK_HEIGHT = 273;
 /**
  * Brand lockup — the logo mark beside the company name and descriptor.
  *
- * Only the *mark* is used, not the supplied `logo.jpeg`, which is a vertical
- * lockup with its own serif wordmark. At an 80px header height that whole
- * image would scale to roughly 108px wide and its wordmark would be unreadable,
- * and its serif type fights General Sans. Pairing the mark with the site's own
- * typography keeps it legible and on-system.
+ * Only the *mark* is used, not the full stacked logo with its serif wordmark:
+ * at an 80px header height that wordmark would be unreadable, and its serif
+ * type fights General Sans. Pairing the mark with the site's own typography
+ * keeps it legible and on-system.
  *
  * Text colours come from the inherited surface variables, so the same component
  * reads navy-on-white in the header and white-on-navy in the footer with no

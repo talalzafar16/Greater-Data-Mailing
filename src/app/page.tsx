@@ -25,7 +25,8 @@ export const metadata: Metadata = buildMetadata("/");
     Why Us      paper
     Stats       ink
     Industries  paper
-    Testimonials white   — currently renders nothing (no quotes yet)
+    Testimonials white   — sample quotes on dev/preview; absent in production
+                           until real quotes are added
     CTA Band    growth
 
   Every paper section is separated from the next by an ink one, so two paper

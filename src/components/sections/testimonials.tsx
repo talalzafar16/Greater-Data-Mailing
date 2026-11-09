@@ -10,7 +10,10 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { EASE_ENGINEERED } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
-import { testimonials } from "@/data/testimonials";
+import {
+  displayedTestimonials as testimonials,
+  showingSampleTestimonials,
+} from "@/data/testimonials";
 
 interface TestimonialsProps {
   eyebrow?: string;
@@ -20,9 +23,10 @@ interface TestimonialsProps {
 /**
  * Quote carousel, one testimonial at a time.
  *
- * Renders `null` while `testimonials` is empty — the section is wired into the
- * homepage but stays invisible until real, attributable quotes are collected.
- * Nothing here fabricates content.
+ * Renders `null` when there is nothing to show — in production that means
+ * until real, attributable quotes are collected. On localhost and preview
+ * deploys it shows the sample quotes instead, with a visible "preview only"
+ * note so nobody mistakes them for real feedback.
  */
 function Testimonials({
   eyebrow = "Client Feedback",
@@ -41,6 +45,12 @@ function Testimonials({
   return (
     <Section variant="white">
       <SectionHeading align="center" eyebrow={eyebrow} title={title} />
+
+      {showingSampleTestimonials ? (
+        <p className="mx-auto mt-6 w-fit rounded-full border border-dashed border-border px-4 py-1 text-center text-sm text-slate">
+          Preview only — sample quotes, hidden on the live site.
+        </p>
+      ) : null}
 
       <div className="relative mx-auto mt-16 max-w-3xl text-center">
         <Quote

@@ -1,10 +1,5 @@
 /**
  * Industries served — the verticals the company targets.
- *
- * NOTE ON COPY: `summary` is client-supplied. `description` and `pieces` were
- * drafted by expanding those summaries into realistic mail types for each
- * vertical. They make no claims about certifications, volumes, or results, but
- * they still need client sign-off before launch.
  */
 
 import {

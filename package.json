@@ -2,14 +2,13 @@
   "name": "greater-data-mailing",
   "version": "0.1.0",
   "private": true,
-  "_comment": "Scripts call package entrypoints through `node` instead of the `.bin` shims: this directory name contains an `&`, which npm's generated .cmd shim expands unquoted and cmd.exe then treats as a command separator. Plain `next dev` fails here. Renaming the folder would let the shims work again.",
   "scripts": {
-    "dev": "node node_modules/next/dist/bin/next dev",
-    "build": "node node_modules/next/dist/bin/next build",
-    "start": "node node_modules/next/dist/bin/next start",
-    "lint": "node node_modules/eslint/bin/eslint.js",
-    "typegen": "node node_modules/next/dist/bin/next typegen",
-    "typecheck": "npm run typegen && node node_modules/typescript/bin/tsc --noEmit"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typegen": "next typegen",
+    "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

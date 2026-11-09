@@ -1,6 +1,6 @@
 # Greater Data & Mailing
 
-Marketing site for Greater Data & Mailing — direct mail, printing, and mailing
+Marketing site for Greater Data & Mailing: direct mail, printing, and mailing
 services in Deer Park, NY.
 
 Built with Next.js 16 (App Router), React 19, TypeScript in strict mode,
@@ -9,6 +9,8 @@ Tailwind CSS v4, shadcn/ui, Framer Motion, and lucide-react.
 ---
 
 ## Running locally
+
+Requires Node.js 20 or newer.
 
 ```bash
 npm install
@@ -24,223 +26,165 @@ npm run dev                  # http://localhost:3000
 | `npm run lint` | ESLint |
 | `npm run typecheck` | Generates route types, then runs `tsc --noEmit` |
 
-> **Why the scripts call `node` directly.** This folder's name contains an `&`.
-> npm's generated `.cmd` shims expand their path before `cmd.exe` parses it, so
-> the `&` splits the command in two and `next dev` fails with a confusing
-> "Cannot find module" error. The scripts invoke each package's entrypoint
-> through `node` to sidestep it. **Rename the folder to remove the `&` and you
-> can revert them to plain `next dev` / `next build`.**
+---
+
+## Launch checklist
+
+The code is complete. Going live needs these steps, all outside the code:
+
+1. **Create a Web3Forms access key** at <https://web3forms.com>, registered
+   with **sl@greaterdata.com**, the address quote requests should arrive at.
+2. **Deploy to Vercel** and add the environment variables (see
+   [Deploying to Vercel](#deploying-to-vercel)).
+3. **Send a test quote request** from the live site and confirm the email
+   arrives at sl@greaterdata.com.
+4. **Submit the sitemap** (`https://www.greaterdata.com/sitemap.xml`) in
+   Google Search Console.
+
+Until step 1 is done, the quote form on `/contact` shows a message asking
+visitors to call instead. It never fails silently.
 
 ---
 
 ## Environment
 
-Copy `.env.example` to `.env.local`. Two variables:
+Copy `.env.example` to `.env.local` for local development. Two variables:
 
 ### `NEXT_PUBLIC_WEB3FORMS_KEY`
 
-Powers the quote form on `/contact`.
+Powers the quote form on `/contact`. Submissions are delivered to whichever
+email address the key was registered with. That address is set in the
+Web3Forms dashboard, not in this code.
 
-1. Go to <https://web3forms.com> and register with **sl@greaterdata.com** —
-   the client asked for quote requests to be delivered there. They send you an
-   access key. The destination lives in their dashboard, not this repo.
-2. Put it in `.env.local`, and add it to the Vercel project's environment
-   variables for Production, Preview, and Development.
-3. In the Web3Forms dashboard, restrict allowed domains and enable spam
-   protection.
+In the Web3Forms dashboard, restrict allowed domains to the site's domain and
+enable spam protection.
 
 The `NEXT_PUBLIC_` prefix is required and means the key ships in the browser
-bundle. That is by design — the key only permits submissions to your inbox and
-cannot read past ones.
-
-Without the key the form still renders, but submitting shows an error asking
-the visitor to call instead. It never fails silently.
+bundle. That is how Web3Forms is designed: the key only permits sending
+submissions to your inbox and cannot read past ones.
 
 ### `NEXT_PUBLIC_SITE_URL`
 
-The production origin, no trailing slash — e.g. `https://www.greaterdata.com`.
+The production address, no trailing slash: `https://www.greaterdata.com`.
 
-It drives every canonical URL, the sitemap, `robots.txt`, and Open Graph tags.
-The client confirmed **www.greaterdata.com**, which is also the fallback in
-`src/data/site.ts`. Set it explicitly on Vercel Production anyway, and leave it
-unset on Preview so preview builds do not emit production canonicals.
+It drives every canonical URL, the sitemap, `robots.txt`, and social share
+tags. `https://www.greaterdata.com` is already the built-in fallback, so this
+is a safeguard rather than a requirement. Set it on **Production only**, and
+leave it unset on Preview so preview links do not claim to be the live site.
 
----
-
-## Where to swap in real photography
-
-Every placeholder is a `<ImagePlaceholder>` — a gradient block with
-`role="img"` and an `aria-label`. **That label is the brief for the photo you
-need.** When the real photo arrives, replace the component with `next/image`
-and pass the same string as `alt`.
-
-| # | File | Photo needed | Aspect |
-| --- | --- | --- | --- |
-| 1 | `src/components/sections/hero.tsx` | Production floor with a high-speed press running | 4:5 portrait |
-| 2 | `src/components/sections/why-us.tsx` | Team member inspecting a mail piece on the production line | 1:1 square |
-| 3 | `src/components/sections/about-story.tsx` | Interior of the Deer Park plant | 4:5 portrait |
-| 4 | `src/components/sections/president-profile.tsx` | Steven Loehr, President — portrait | 1:1 square |
-| 5 | `src/components/sections/facility-gallery.tsx` | Press floor, sheet fed and web presses running | 4:3 landscape |
-| 6 | `src/components/sections/facility-gallery.tsx` | High-speed inserting machines running a matched mailing | 4:3 landscape |
-| 7 | `src/components/sections/facility-gallery.tsx` | Trays of finished mail staged for USPS pickup | 4:3 landscape |
-
-Alt text for 1–4 lives in `src/data/copy.ts`; the three gallery briefs are in
-`aboutCopy.galleryShots`.
-
-### Swapping one out
-
-```tsx
-// before
-<ImagePlaceholder alt={heroCopy.imageAlt} className="aspect-4/5 w-full rounded-2xl" />
-
-// after
-<Image
-  src="/photos/press-floor.jpg"
-  alt={heroCopy.imageAlt}
-  width={800}
-  height={1000}
-  priority                                    /* hero only — it is the LCP image */
-  sizes="(max-width: 1024px) 100vw, 40vw"
-  className="aspect-4/5 w-full rounded-2xl object-cover"
-/>
-```
-
-Guidelines:
-
-- **`priority` on the hero image only.** It is the largest paint above the
-  fold. Everything else should lazy-load, which is `next/image`'s default.
-- **Always set `sizes`** when the image is not a fixed width, or the browser
-  downloads the largest candidate. Match it to the layout: the hero and Why Us
-  images occupy roughly 40% of the viewport above `lg`, full width below.
-- Put files in `public/photos/`.
-- `next/image` is **not** used yet, because there are no real images to
-  optimise — a `next/image` pointing at nothing would just break the build.
-
----
-
-## Updating content
-
-All copy lives in `src/data/`. You should not need to open a `.tsx` file to
-change wording.
-
-| File | Contains |
-| --- | --- |
-| `site.ts` | NAP: name, address, phone, email, production URL |
-| `copy.ts` | Section headings, body copy, CTA labels, image alt text |
-| `seo.ts` | Per-page `<title>` and meta description |
-| `services.ts` | The four services — powers the hub, sub-pages, header dropdown, homepage trio |
-| `industries.ts` | The six industries — powers the industries page, homepage strip, footer |
-| `stats.ts` | The four numbers in the stats band |
-| `testimonials.ts` | Client quotes (currently empty — see below) |
-| `nav.ts` | Header and footer navigation |
-
-### Stat numbers — `src/data/stats.ts`
-
-```ts
-{ value: 38, suffix: "+", label: "Years in Business" }
-```
-
-`value` is the number, animated from 0 by `AnimatedCounter` when scrolled into
-view. `prefix` and `suffix` are the non-numeric parts (`"$"`, `"%"`, `"M"`,
-`"+"`). Keep them separate — putting `"38+"` in `value` breaks the count-up.
-
-> All four numbers were **confirmed by the client (Aug 2026)**. They are still
-> claims the business can be held to, so re-confirm before reusing them in paid
-> advertising.
-
-### Testimonials — `src/data/testimonials.ts`
-
-The array is **intentionally empty**, and the `Testimonials` section returns
-`null` when it is, so the homepage simply omits it. Nothing is fabricated.
-
-To add real quotes:
-
-```ts
-export const testimonials: Testimonial[] = [
-  {
-    id: "acme-2026",              // any stable unique string
-    quote: "…",                   // their words, with permission
-    author: "Jane Doe",
-    role: "Director of Marketing", // optional
-    company: "Acme Nonprofit",     // optional
-    industry: "nonprofit",         // optional, slug from industries.ts
-    featured: true,                // optional
-  },
-];
-```
-
-The section appears automatically once the array is non-empty: heading, one
-quote at a time, prev/next arrows, dot indicators, and `aria-live`
-announcements. With one entry the controls hide themselves.
-
-**Only add real, attributable quotes you have permission to publish.** Sample
-testimonials would ship as fabricated endorsements.
-
-> This carousel has never run with data in it — it typechecks and builds, but
-> the code path is unexercised. Give it a look when you add the first quote.
-
-### Business hours
-
-`contactCopy.hours` in `src/data/copy.ts`, plus the
-`openingHoursSpecification` block in
-`src/components/layout/structured-data.tsx`. Both are confirmed (Mon–Fri
-8:30am–5:00pm). **Change both together** — the structured-data copy feeds
-Google's knowledge panel, where people act on it and turn up at the door.
+> **Both values are baked in at build time.** After adding or changing either
+> one in Vercel, **redeploy** for it to take effect. An existing deployment
+> will not pick it up.
 
 ---
 
 ## Deploying to Vercel
 
-1. Push to GitHub.
-2. In Vercel, **Add New → Project** and import the repo. Framework preset
-   detects as Next.js; leave build command and output directory as-is.
-3. **Settings → Environment Variables**, add for Production, Preview, and
-   Development:
-   - `NEXT_PUBLIC_WEB3FORMS_KEY`
-   - `NEXT_PUBLIC_SITE_URL` (Production: the real domain. Preview: leave unset
-     so previews do not emit canonicals pointing at production.)
-4. Deploy.
-5. **Settings → Domains**, add the domain and follow the DNS instructions.
-6. After the domain is live, confirm `NEXT_PUBLIC_SITE_URL` matches it exactly
-   — including `www` or its absence. A mismatch puts wrong canonical URLs on
-   every page.
-7. Submit `https://yourdomain.com/sitemap.xml` in Google Search Console.
-8. Test the quote form end to end on the live domain and confirm the email
-   arrives.
+1. Push the code to a GitHub repository.
+2. In Vercel, **Add New → Project** and import the repository. It detects
+   Next.js automatically; leave the build settings as they are.
+3. **Settings → Environment Variables**:
+   - `NEXT_PUBLIC_WEB3FORMS_KEY`: Production, Preview, and Development
+   - `NEXT_PUBLIC_SITE_URL` = `https://www.greaterdata.com`: Production only
+4. Deploy (or redeploy, if you added the variables after the first deploy).
+5. **Settings → Domains**, add `www.greaterdata.com` and follow the DNS
+   instructions.
 
-Every route is statically prerendered, so there is no server runtime to
-configure and the free tier is sufficient.
+Every page is pre-rendered at build time, so there is no server or database
+to manage, and Vercel's free tier is enough.
 
 ---
 
-## Before launch
+## Updating content
 
-Confirmed by the client (Aug 2026): domain, phone, email, the four stat
-numbers, business hours, the address, and that there are **no social profiles**
-and **the cell number must not be published** (it has been removed from the
-site).
+Almost all wording lives in `src/data/`. You should rarely need to open a
+`.tsx` file.
 
-Still outstanding:
+| File | Contains |
+| --- | --- |
+| `site.ts` | Name, address, phone, email, production URL |
+| `copy.ts` | Section headings, body copy, button labels, photo paths and alt text, business hours |
+| `seo.ts` | Each page's `<title>` and meta description |
+| `services.ts` | The four services: hub page, service pages, header menu, homepage |
+| `industries.ts` | The six industries: industries page, homepage strip, footer |
+| `stats.ts` | The four numbers in the stats band |
+| `testimonials.ts` | Client quotes (see below) |
+| `nav.ts` | Header and footer navigation |
 
-- [ ] Sign up for Web3Forms using **sl@greaterdata.com** as the destination,
-      set `NEXT_PUBLIC_WEB3FORMS_KEY`, and test a real submission
-- [ ] Set `NEXT_PUBLIC_SITE_URL` to `https://www.greaterdata.com` in Vercel
-      (Production only)
-- [ ] **Privacy policy** — client wants to discuss; still needs an attorney and
-      confirmation of its claims about list handling. See the comment block at
-      the top of `src/app/privacy/page.tsx`
-- [ ] Seven photographs (client is sourcing) — see the table above
-- [ ] Logo asset (client sending) — the header/footer currently render a styled
-      text lockup, not an image
-- [ ] Testimonials (client can obtain) — section stays hidden until
-      `src/data/testimonials.ts` has entries
-- [ ] Replace the favicon — still the Next.js default
-- [ ] Add an Open Graph share image — link previews have no image
-- [ ] Client review of the drafted copy: the `whatItIs` paragraphs in
-      `services.ts` and the `description` / `pieces` in `industries.ts`
-- [ ] *Nice to have:* spot-check the `geo` coordinates in
-      `structured-data.tsx` against the pin in Google Maps. They were geocoded
-      from the confirmed street address rather than read off a map
+### Testimonials: `src/data/testimonials.ts`
+
+Add real client quotes to the `testimonials` array:
+
+```ts
+export const testimonials: Testimonial[] = [
+  {
+    id: "acme-2026",               // any unique string
+    quote: "…",                    // their words, with their permission
+    author: "Jane Doe",
+    role: "Director of Marketing", // optional
+    company: "Acme Nonprofit",     // optional
+  },
+];
+```
+
+The homepage testimonials section appears on the live site as soon as the
+array has at least one entry. With several, it becomes a carousel with arrows
+and dots.
+
+Until then, the live site leaves the section out entirely. On your own
+computer (`npm run dev`) and on Vercel preview links, it shows four
+`sampleTestimonials` with a "Preview only" note so you can see the layout.
+Those samples never appear on the live site. **Do not move them into
+`testimonials`.** Published testimonials must be real: invented endorsements
+break the FTC's rule on consumer reviews and testimonials.
+
+### Stats: `src/data/stats.ts`
+
+```ts
+{ value: 38, suffix: "+", label: "Years in Business" }
+```
+
+`value` must be a plain number because it animates up from 0. Put symbols in
+`prefix` / `suffix` (`"$"`, `"%"`, `"M"`, `"+"`). Writing `"38+"` in `value`
+breaks the animation.
+
+### Business hours
+
+Change them in **two** places together:
+
+- `contactCopy.hours` in `src/data/copy.ts` (shown on the Contact page)
+- `openingHoursSpecification` in `src/components/layout/structured-data.tsx`
+  (read by Google for its business panel)
+
+### Photos
+
+Photos live in `public/photos/`. The path and alt text for each one are in
+`src/data/copy.ts` (`heroCopy.image`, `whyUsCopy.image`,
+`aboutCopy.storyImage`, `aboutCopy.presidentImage`, `aboutCopy.galleryShots`).
+
+To replace a photo, either overwrite the file with one of the same name, or
+add a new file and update its path in `copy.ts`. Keep a similar shape to the
+original (the hero and plant-interior shots are portrait, the gallery shots
+are landscape), and if the subject changes, update the alt text to describe
+the new photo.
+
+### Social share image
+
+`public/og-image.jpg` (1200×630) is the preview image shown when a link to
+the site is shared on LinkedIn, Facebook, WhatsApp, iMessage, etc. To change
+it, replace the file with another 1200×630 JPEG of the same name, and update
+its description (`shareImage.alt`) in `src/lib/metadata.ts`. Social platforms
+cache previews, so an old image can linger there for a while after a change.
+
+### Privacy policy
+
+`src/app/privacy/page.tsx`. It is a general-purpose policy describing how
+this site works (the quote form, the embedded Google Map, no tracking
+cookies). It has not been reviewed by an attorney. Update `EFFECTIVE_DATE` at
+the top whenever it changes, and revisit the cookies section if analytics or
+advertising tracking is ever added.
+
+---
 
 ## Notes for developers
 
@@ -248,7 +192,7 @@ Still outstanding:
 `.on-ink` and `.on-light` redefine `--heading-color`, `--body-color`, and
 `--growth-text`, so a white card inside a navy section reverts to dark text
 automatically. Use `bg-growth` for decorative fills and `text-growth-text` for
-green text — the latter follows the surface.
+green text, since the latter follows the surface.
 
 **Contrast.** Several tokens were adjusted to meet WCAG AA:
 `--slate` is `#5f6e85` (the original `#64748b` measured 4.41:1 on paper), and

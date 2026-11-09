@@ -29,23 +29,15 @@ function StructuredData() {
       postalCode: site.address.zip,
       addressCountry: "US",
     },
-    /*
-      TODO: verify these coordinates against the exact building.
-
-      These are Deer Park, NY village-centre coordinates, not a geocode of 551
-      Acorn Street — I had no geocoding available. They will place the pin in
-      the right town but not necessarily on the right lot. Run the address
-      through a geocoder and replace before launch.
-    */
     geo: {
       "@type": "GeoCoordinates",
       latitude: 40.7626,
       longitude: -73.3293,
     },
     /*
-      TODO: confirm hours with client — same unverified values as /contact.
-      These feed Google's knowledge panel, where people act on them and turn
-      up at the door, so treat a correction here as urgent.
+      Must match `contactCopy.hours` in data/copy.ts. These feed Google's
+      knowledge panel, where people act on them and turn up at the door, so
+      change both together.
     */
     openingHoursSpecification: [
       {

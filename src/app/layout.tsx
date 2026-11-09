@@ -7,6 +7,7 @@ import {
   WebsiteSchema,
 } from "@/components/layout/structured-data";
 import { fontVariables } from "@/lib/fonts";
+import { shareImage } from "@/lib/metadata";
 import { pageSeo } from "@/data/seo";
 import { site } from "@/data/site";
 import "./globals.css";
@@ -36,11 +37,13 @@ export const metadata: Metadata = {
     description,
     url: site.url,
     locale: "en_US",
+    images: [shareImage],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    images: [shareImage],
   },
   robots: {
     index: true,

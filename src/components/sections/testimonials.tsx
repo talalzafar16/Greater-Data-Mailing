@@ -10,17 +10,14 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { EASE_ENGINEERED } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
-import {
-  displayedTestimonials as testimonials,
-  showingSampleTestimonials,
-} from "@/data/testimonials";
+import { displayedTestimonials as testimonials } from "@/data/testimonials";
 
 interface TestimonialsProps {
   eyebrow?: string;
   title?: string;
 }
 
-/** Renders null when there are no quotes; sample quotes show only outside production. */
+/** Shows real quotes, or the sample quotes until real ones are added. */
 function Testimonials({
   eyebrow = "Client Feedback",
   title = "What our clients say.",
@@ -38,12 +35,6 @@ function Testimonials({
   return (
     <Section variant="white">
       <SectionHeading align="center" eyebrow={eyebrow} title={title} />
-
-      {showingSampleTestimonials ? (
-        <p className="mx-auto mt-6 w-fit rounded-full border border-dashed border-border px-4 py-1 text-center text-sm text-slate">
-          Preview only — sample quotes, hidden on the live site.
-        </p>
-      ) : null}
 
       <div className="relative mx-auto mt-16 max-w-3xl text-center">
         <Quote

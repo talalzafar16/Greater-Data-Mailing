@@ -16,7 +16,7 @@ import { WhyUs } from "@/components/sections/why-us";
 export const metadata: Metadata = buildMetadata("/");
 
 // Order matters: an ink section separates the two paper ones (WhyUs, IndustriesStrip),
-// so paper backgrounds never touch, even when Testimonials renders nothing in production.
+// so paper backgrounds never touch, even if Testimonials renders nothing.
 export default function Home() {
   return (
     <main>

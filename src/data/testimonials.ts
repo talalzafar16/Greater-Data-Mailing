@@ -17,8 +17,8 @@ export interface Testimonial {
 // Real, attributable quotes published with permission only.
 export const testimonials: Testimonial[] = [];
 
-// Preview-only placeholders. Never move these into `testimonials`: fake
-// endorsements violate the FTC consumer-review rule (16 CFR Part 465).
+// Placeholders shown until real quotes exist. Replace or delete before public launch:
+// fake endorsements presented as real violate the FTC rule (16 CFR 465).
 export const sampleTestimonials: Testimonial[] = [
   {
     id: "sample-nonprofit",
@@ -56,17 +56,9 @@ export const sampleTestimonials: Testimonial[] = [
   },
 ];
 
-// Samples show only in dev or Vercel preview, never in a production build on any host.
-const isPreviewEnvironment =
-  process.env.NODE_ENV === "development" ||
-  process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
-
-export const showingSampleTestimonials =
-  testimonials.length === 0 && isPreviewEnvironment;
-
-export const displayedTestimonials: Testimonial[] = showingSampleTestimonials
-  ? sampleTestimonials
-  : testimonials;
+// Real quotes replace the samples as soon as there is at least one.
+export const displayedTestimonials: Testimonial[] =
+  testimonials.length > 0 ? testimonials : sampleTestimonials;
 
 export const featuredTestimonials = (): Testimonial[] =>
   testimonials.filter((testimonial) => testimonial.featured);

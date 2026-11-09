@@ -40,6 +40,9 @@ The code is complete. Going live needs these steps, all outside the code:
    arrives at sl@greaterdata.com.
 4. **Submit the sitemap** (`https://www.greaterdata.com/sitemap.xml`) in
    Google Search Console.
+5. **Replace the sample testimonials** on the homepage with real client quotes,
+   or delete the samples (see [Testimonials](#testimonials-srcdatatestimonialsts)).
+   They are placeholders, not real clients.
 
 Until step 1 is done, the quote form on `/contact` shows a message asking
 visitors to call instead. It never fails silently.
@@ -127,16 +130,17 @@ export const testimonials: Testimonial[] = [
 ];
 ```
 
-The homepage testimonials section appears on the live site as soon as the
-array has at least one entry. With several, it becomes a carousel with arrows
-and dots.
+With several quotes, the homepage section becomes a carousel with arrows and
+dots.
 
-Until then, the live site leaves the section out entirely. On your own
-computer (`npm run dev`) and on Vercel preview links, it shows four
-`sampleTestimonials` with a "Preview only" note so you can see the layout.
-Those samples never appear on the live site. **Do not move them into
-`testimonials`.** Published testimonials must be real: invented endorsements
-break the FTC's rule on consumer reviews and testimonials.
+Until the first real quote is added, the section shows four
+`sampleTestimonials` so the layout can be reviewed. The first real quote
+replaces them automatically.
+
+**The samples are not real clients and must not stay up on the public site.**
+Before launch, add real quotes, or delete the entries in `sampleTestimonials`
+to hide the section until real quotes arrive. Invented endorsements presented
+as genuine break the FTC's rule on consumer reviews and testimonials.
 
 ### Stats: `src/data/stats.ts`
 

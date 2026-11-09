@@ -3,10 +3,7 @@ import type { MetadataRoute } from "next";
 import { serviceHref, services } from "@/data/services";
 import { site } from "@/data/site";
 
-/**
- * Static routes with hand-set priorities. Service detail pages are derived
- * from `services.ts`, so adding a fifth service adds it here automatically.
- */
+/** Static routes are listed by hand; service pages are derived from `services.ts`. */
 export default function sitemap(): MetadataRoute.Sitemap {
   // Build time, not request time — this route stays statically generated.
   const lastModified = new Date();

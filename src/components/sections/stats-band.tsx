@@ -15,11 +15,7 @@ function StatsBand() {
               key={stat.label}
               className={cn(
                 "px-4 text-center md:px-6",
-                /*
-                  Dividers sit on the left edge of every item that isn't
-                  starting a row. That's the even-indexed items in the 2-column
-                  layout, and everything but the first in the 4-column one.
-                */
+                // Left divider on every item that doesn't start a row (2 cols below md, 4 at md).
                 index % 2 === 1 && "border-l border-white/10",
                 index === 0
                   ? "md:border-l-0"

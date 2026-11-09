@@ -7,7 +7,6 @@ interface IconBoxProps extends React.ComponentProps<"div"> {
   icon: LucideIcon;
 }
 
-/** 48px tinted square holding a 24px green lucide icon. */
 function IconBox({ icon: Icon, className, ...props }: IconBoxProps) {
   return (
     <div

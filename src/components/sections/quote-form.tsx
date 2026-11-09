@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-// `CircleAlert`/`LoaderCircle` are the current names; `AlertCircle`/`Loader2`
-// still resolve but only as deprecated aliases in lucide-react v1.
+// `AlertCircle`/`Loader2` are deprecated aliases of `CircleAlert`/`LoaderCircle` in lucide-react v1.
 import { Check, CircleAlert, LoaderCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -21,10 +20,6 @@ import { EASE_ENGINEERED } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
-
-/* -------------------------------------------------------------------------- */
-/* Shape                                                                      */
-/* -------------------------------------------------------------------------- */
 
 interface FormValues {
   projectType: string;
@@ -80,11 +75,7 @@ const TIMELINES = [
 const STEP_COUNT = 4;
 const REVIEW_STEP = STEP_COUNT;
 
-/**
- * Deliberately permissive. The goal is to catch typos like a missing `@`, not
- * to adjudicate RFC 5322 — a real address rejected by a clever regex is a lost
- * lead, and the address gets verified when we reply anyway.
- */
+/** Deliberately permissive: catches typos, since rejecting a real address loses a lead. */
 function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
@@ -116,10 +107,6 @@ function validateStep(step: number, values: FormValues): Errors {
   return errors;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Small building blocks                                                      */
-/* -------------------------------------------------------------------------- */
-
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
@@ -142,7 +129,6 @@ function StepProgress({ current }: { current: number }) {
               key={index}
               className={cn("flex items-center", index > 0 && "flex-1")}
             >
-              {/* Connector, drawn before every dot except the first. */}
               {index > 0 ? (
                 <span
                   aria-hidden="true"
@@ -190,10 +176,6 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/* Form                                                                       */
-/* -------------------------------------------------------------------------- */
-
 type Status = "idle" | "submitting" | "success" | "error";
 
 function QuoteForm() {
@@ -208,8 +190,6 @@ function QuoteForm() {
 
   const setField = (field: FieldName, value: string) => {
     setValues((previous) => ({ ...previous, [field]: value }));
-    // Clear the error as soon as the user acts on it, rather than making them
-    // press Continue again to find out whether it is fixed.
     setErrors((previous) =>
       previous[field] ? { ...previous, [field]: undefined } : previous
     );
@@ -286,10 +266,6 @@ function QuoteForm() {
     }
   };
 
-  /* ---------------------------------------------------------------------- */
-  /* Success — replaces the entire card                                      */
-  /* ---------------------------------------------------------------------- */
-
   if (status === "success") {
     return (
       <motion.div
@@ -323,17 +299,10 @@ function QuoteForm() {
     );
   }
 
-  /* ---------------------------------------------------------------------- */
-  /* Steps                                                                   */
-  /* ---------------------------------------------------------------------- */
-
   const stepContent = [
-    // 1 — Project type
     <fieldset
       key="project-type"
       className="border-0 p-0"
-      // On the fieldset, so the error is announced with the whole group
-      // rather than attached to one arbitrary radio.
       aria-describedby={errors.projectType ? "projectType-error" : undefined}
     >
       <legend className="font-heading text-lg font-bold text-ink">
@@ -349,8 +318,7 @@ function QuoteForm() {
               key={option}
               className={cn(
                 "flex cursor-pointer items-center gap-3 rounded-lg border p-4 text-base transition-colors",
-                // Explicit `has-[...]` form — the visually hidden radio keeps
-                // real focus, so the card shows the ring on its behalf.
+                // The sr-only radio holds focus, so the card shows the ring for it.
                 "has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50",
                 selected
                   ? "border-growth bg-growth/5 text-ink"
@@ -363,12 +331,10 @@ function QuoteForm() {
                 value={option}
                 checked={selected}
                 onChange={() => setField("projectType", option)}
-                // No `aria-invalid` here: the radio role does not support it.
-                // The group's error is announced via `aria-describedby` on the
-                // fieldset instead.
+                // No `aria-invalid`: the radio role doesn't support it. The
+                // fieldset's `aria-describedby` announces the error instead.
                 className="sr-only"
               />
-              {/* Custom control — the real radio stays in the a11y tree. */}
               <span
                 aria-hidden="true"
                 className={cn(
@@ -389,7 +355,6 @@ function QuoteForm() {
       <FieldError id="projectType-error" message={errors.projectType} />
     </fieldset>,
 
-    // 2 — Quantity and format
     <div key="quantity" className="flex flex-col gap-6">
       <p className="font-heading text-lg font-bold text-ink">
         How big is the job?
@@ -397,8 +362,7 @@ function QuoteForm() {
 
       <div>
         <Label htmlFor="quantity">Estimated quantity</Label>
-        {/* `undefined` rather than "" — Radix treats the empty string as a
-            reserved value and would not show the placeholder. */}
+        {/* `undefined`, not "": Radix reserves "" and wouldn't show the placeholder. */}
         <Select
           value={values.quantity || undefined}
           onValueChange={(value) => setField("quantity", value)}
@@ -438,7 +402,6 @@ function QuoteForm() {
       </div>
     </div>,
 
-    // 3 — Timeline and message
     <div key="timeline" className="flex flex-col gap-6">
       <p className="font-heading text-lg font-bold text-ink">
         When do you need it?
@@ -486,7 +449,6 @@ function QuoteForm() {
       </div>
     </div>,
 
-    // 4 — Contact details
     <div key="contact" className="flex flex-col gap-6">
       <p className="font-heading text-lg font-bold text-ink">
         Where should we send the quote?
@@ -551,7 +513,6 @@ function QuoteForm() {
       </div>
     </div>,
 
-    // 5 — Review
     <div key="review">
       <p className="font-heading text-lg font-bold text-ink">
         Does this look right?
@@ -577,13 +538,8 @@ function QuoteForm() {
   const onReview = step === REVIEW_STEP;
   const slide = reduceMotion ? 0 : 32;
 
-  /*
-    Variants rather than inline `initial`/`exit` objects: an exiting child in
-    `AnimatePresence` keeps the props it was rendered with, so an inline
-    `exit` would use whatever `direction` held on the *previous* transition and
-    slide the wrong way when going Back. Resolving `exit` through a function
-    variant lets `AnimatePresence custom={direction}` feed it the current value.
-  */
+  // Function variants + `custom={direction}`: an exiting child keeps stale props,
+  // so an inline `exit` would slide the wrong way when going Back.
   const slideVariants = {
     enter: (dir: number) => ({ opacity: 0, x: dir * slide }),
     center: { opacity: 1, x: 0 },
@@ -604,11 +560,6 @@ function QuoteForm() {
           }
         }}
       >
-        {/*
-          `mode="wait"` keeps the outgoing step from overlapping the incoming
-          one, so the card never shows two question groups at once. The height
-          settles naturally because only one child is mounted at a time.
-        */}
         <AnimatePresence mode="wait" initial={false} custom={direction}>
           <motion.div
             key={step}

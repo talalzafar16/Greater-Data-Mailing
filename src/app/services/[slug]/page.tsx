@@ -6,7 +6,6 @@ import { buildMetadata } from "@/lib/metadata";
 import type { PageSeoKey } from "@/data/seo";
 import { getService, services } from "@/data/services";
 
-/** Prerender all four service pages at build time. */
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
 }

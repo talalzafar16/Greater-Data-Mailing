@@ -21,11 +21,7 @@ export default function ContactPage() {
           </p>
         </FadeIn>
 
-        {/*
-          Form first in the DOM so it is also first on mobile, where the grid
-          collapses to a single column — and first for keyboard and screen
-          reader users on every viewport.
-        */}
+        {/* Form first in the DOM so it leads on mobile and for keyboard/screen-reader users. */}
         <div className="mt-16 grid items-start gap-8 lg:grid-cols-12 lg:gap-12">
           <FadeIn className="lg:col-span-7">
             <QuoteForm />

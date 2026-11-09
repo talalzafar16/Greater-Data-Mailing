@@ -5,12 +5,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { aboutCopy } from "@/data/copy";
 
-/**
- * Three plant shots, currently licensed stock standing in for photography of
- * the Deer Park facility. Swapping them is a `src` change in `aboutCopy` —
- * keep the files cropped 4:3 so the grid rows stay level.
- */
-
+/** Shots come from `aboutCopy.galleryShots`; keep them cropped 4:3 so grid rows stay level. */
 function FacilityGallery() {
   return (
     <Section variant="white">

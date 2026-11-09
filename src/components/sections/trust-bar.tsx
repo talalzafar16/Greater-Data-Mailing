@@ -1,16 +1,10 @@
 import { Container } from "@/components/ui/container";
 import { trustBarCopy } from "@/data/copy";
 
-
-
 function TrustBar() {
   return (
     <div className="bg-ink py-5">
       <Container>
-        {/*
-          2x2 grid on small screens; a single centred row with green dot
-          separators from `lg` up, where four items fit comfortably.
-        */}
         <ul className="grid grid-cols-2 gap-x-6 gap-y-4 lg:flex lg:items-center lg:justify-center lg:gap-0">
           {trustBarCopy.points.map((point, index) => (
             <li key={point} className="flex items-center justify-center">

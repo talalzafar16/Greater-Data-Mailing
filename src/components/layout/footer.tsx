@@ -32,16 +32,10 @@ function FooterColumn({ title, items }: { title: string; items: NavItem[] }) {
 }
 
 function Footer() {
-  // Rendered on the server, so this is the build date for statically
-  // prerendered pages — it advances on the next deploy, not at midnight.
+  // Build-time year on prerendered pages; it advances on the next deploy.
   const year = new Date().getFullYear();
 
-  /*
-    There are no industry sub-pages — /industries is a single page — so each
-    name deep-links to its own card via an anchor rather than to a
-    /industries/<slug> route, which would 404. Falls back to the bare index
-    link if the data file is ever emptied.
-  */
+  // No industry sub-pages exist, so link to anchors on /industries (a /industries/<slug> route would 404).
   const industryItems: NavItem[] =
     industries.length > 0
       ? industries.map((industry) => ({
@@ -55,17 +49,7 @@ function Footer() {
       <Container className="py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col">
-            {/*
-              Stacked rather than inline as in the header: this column is a
-              quarter width, so a side-by-side lockup would wrap the name.
-
-              `self-start` is load-bearing. The parent is `flex flex-col`, so
-              the default `align-items: stretch` pulls the image to the full
-              column width on the cross axis and `w-auto` cannot stop it —
-              which stretched the mark to 272x48 against its natural 1.465
-              ratio. The header escapes this only because it is a row with
-              `items-center`.
-            */}
+            {/* `self-start` is load-bearing: without it the flex column stretches the image out of ratio. */}
             <Image
               src="/logo-mark.png"
               alt=""

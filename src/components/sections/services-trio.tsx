@@ -18,8 +18,7 @@ function ServicesTrio() {
 
       <FadeInStagger className="mt-16 grid gap-8 md:grid-cols-3">
         {services.map((service) => (
-          // `flex` on the wrapper lets the card stretch to the row height, so
-          // the "Learn more" links align across all three.
+          // `flex` lets the card stretch to row height so the links align.
           <FadeIn key={service.slug} className="flex">
             <FeatureCard
               icon={service.icon}

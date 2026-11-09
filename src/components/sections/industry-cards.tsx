@@ -6,13 +6,7 @@ import { Section } from "@/components/ui/section";
 import { industries } from "@/data/industries";
 import { industriesCopy } from "@/data/copy";
 
-/**
- * The detailed two-column industry cards on /industries.
- *
- * Deliberately not using `interactiveCardClass`: these cards go nowhere — there
- * are no industry sub-pages — so they get no hover lift, which would read as a
- * promise of a click target that doesn't exist.
- */
+/** No `interactiveCardClass` hover lift: these cards aren't links. */
 function IndustryCards() {
   if (industries.length === 0) return null;
 
@@ -21,10 +15,7 @@ function IndustryCards() {
       <FadeInStagger className="grid gap-8 lg:grid-cols-2">
         {industries.map((industry) => (
           <FadeIn key={industry.slug} className="flex">
-            {/*
-              `id` is the anchor target for the footer's industry links.
-              `scroll-mt-28` clears the 80px sticky header when jumped to.
-            */}
+            {/* `id` is the footer links' anchor; `scroll-mt-28` clears the sticky header. */}
             <article
               id={industry.slug}
               className="on-light flex w-full scroll-mt-28 flex-col rounded-xl border border-border bg-white p-8"

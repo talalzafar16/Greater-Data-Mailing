@@ -13,10 +13,7 @@ import { aboutCopy } from "@/data/copy";
 
 export const metadata: Metadata = buildMetadata("/about");
 
-/*
-  Background rhythm: ink → white → paper → white → paper → white → growth.
-  No two paper sections touch.
-*/
+// Background rhythm: ink → white → paper → white → paper → white → growth; no two paper sections touch.
 export default function AboutPage() {
   return (
     <main>

@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Stop `next dev` from writing AGENTS.md / CLAUDE.md into the project root
-  // when it detects an AI coding tool. Those files are not part of the site.
+  // Stops `next dev` writing AGENTS.md / CLAUDE.md into the project root.
   agentRules: false,
 };
 

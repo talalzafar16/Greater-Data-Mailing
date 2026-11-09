@@ -1,7 +1,3 @@
-/**
- * Navigation structure — header, footer, and the header CTA.
- */
-
 import type { LucideIcon } from "lucide-react";
 
 import { serviceHref, services } from "./services";
@@ -9,10 +5,8 @@ import { serviceHref, services } from "./services";
 export interface NavItem {
   label: string;
   href: string;
-  /** Supporting copy for mega-menu / dropdown rows. */
   description?: string;
   icon?: LucideIcon;
-  /** Renders as a dropdown when present. */
   children?: NavItem[];
   external?: boolean;
 }
@@ -22,10 +16,6 @@ export interface NavGroup {
   items: NavItem[];
 }
 
-/**
- * The four service pages, shown as a 2x2 panel under "Services".
- * Derived from `services.ts` so the dropdown and the pages cannot drift apart.
- */
 export const serviceNavItems: NavItem[] = services.map((service) => ({
   label: service.navLabel,
   href: serviceHref(service),
@@ -33,7 +23,6 @@ export const serviceNavItems: NavItem[] = services.map((service) => ({
   icon: service.icon,
 }));
 
-/** Primary header navigation. */
 export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -49,7 +38,6 @@ export const companyNav: NavItem[] = [
   { label: "Privacy Policy", href: "/privacy" },
 ];
 
-/** Header call-to-action button. */
 export const navCta: NavItem = {
   label: "Request a Quote",
   href: "/contact",

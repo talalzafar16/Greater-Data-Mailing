@@ -13,14 +13,7 @@ import {
 } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-/**
- * True when a `FadeInStagger` is driving this subtree.
- *
- * A staggering parent animates its children by propagating variant *states*
- * down the tree. If a child also declared its own `whileInView`, it would
- * take over its own timing and the stagger would collapse — so children check
- * this and stay passive when a parent is in charge.
- */
+/** True inside a `FadeInStagger`; children then skip their own `whileInView`, which would break the stagger. */
 const FadeInStaggerContext = React.createContext(false);
 
 type FadeInProps = React.ComponentProps<typeof motion.div> & {
@@ -56,9 +49,6 @@ function FadeIn({ className, delay = 0, children, ...props }: FadeInProps) {
   );
 }
 
-/**
- * Reveals its `FadeIn` descendants one after another, 0.08s apart.
- */
 function FadeInStagger({
   className,
   children,

@@ -1,16 +1,8 @@
 import { services, serviceHref } from "@/data/services";
 import { formattedAddress, site } from "@/data/site";
 
-/**
- * LocalBusiness JSON-LD.
- *
- * Everything here reads from `site.ts`, so the structured data and the visible
- * NAP cannot disagree — which is the whole point: search engines cross-check
- * the two, and a mismatch costs local ranking.
- *
- * Still omitted: `aggregateRating` and `review`. No real reviews exist, and
- * fabricating them is both dishonest and a Google structured-data violation.
- */
+// LocalBusiness JSON-LD. Values read from site.ts so they stay in sync with the visible NAP.
+// No aggregateRating/review: there are no real reviews, and fake ones violate Google's rules.
 function StructuredData() {
   const schema = {
     "@context": "https://schema.org",
@@ -34,11 +26,7 @@ function StructuredData() {
       latitude: 40.7626,
       longitude: -73.3293,
     },
-    /*
-      Must match `contactCopy.hours` in data/copy.ts. These feed Google's
-      knowledge panel, where people act on them and turn up at the door, so
-      change both together.
-    */
+    // Must match `contactCopy.hours` in data/copy.ts; change both together.
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -53,7 +41,6 @@ function StructuredData() {
         closes: "17:00",
       },
     ],
-    // Schema.org expects a relative indicator, not a figure we would be held to.
     priceRange: "$$",
     areaServed: [
       { "@type": "Place", name: "Long Island, New York" },
@@ -85,15 +72,13 @@ function StructuredData() {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        // Escaping `<` per the Next.js JSON-LD guide: it stops a literal
-        // "</script>" in any future data value from closing the tag early.
+        // Escape `<` so a "</script>" in a data value can't close the tag early.
         __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
       }}
     />
   );
 }
 
-/** Breadcrumb + WebSite entities, kept separate for clarity. */
 function WebsiteSchema() {
   const schema = {
     "@context": "https://schema.org",
@@ -109,8 +94,7 @@ function WebsiteSchema() {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        // Escaping `<` per the Next.js JSON-LD guide: it stops a literal
-        // "</script>" in any future data value from closing the tag early.
+        // Escape `<` so a "</script>" in a data value can't close the tag early.
         __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
       }}
     />

@@ -1,19 +1,4 @@
-/**
- * Client testimonials.
- *
- * `testimonials` holds REAL quotes only — attributable, and published with the
- * client's permission. It is empty until those are collected.
- *
- * While it is empty, `sampleTestimonials` fill the section on localhost and
- * Vercel preview deploys so the layout can be reviewed. They never render in a
- * production build: made-up quotes on the live site would be fabricated
- * endorsements, which the FTC's consumer-review rule (16 CFR Part 465) makes
- * a civil-penalty offence. Add the first real quote and the samples disappear
- * everywhere.
- */
-
 export interface Testimonial {
-  /** Stable key for React lists and anchors. */
   id: string;
   quote: string;
   author: string;
@@ -29,13 +14,11 @@ export interface Testimonial {
   featured?: boolean;
 }
 
+// Real, attributable quotes published with permission only.
 export const testimonials: Testimonial[] = [];
 
-/**
- * Preview-only placeholders. Attributed to roles and organization types, not
- * named people or companies, and they only restate claims the site already
- * makes elsewhere. Never move these into `testimonials`.
- */
+// Preview-only placeholders. Never move these into `testimonials`: fake
+// endorsements violate the FTC consumer-review rule (16 CFR Part 465).
 export const sampleTestimonials: Testimonial[] = [
   {
     id: "sample-nonprofit",
@@ -73,21 +56,14 @@ export const sampleTestimonials: Testimonial[] = [
   },
 ];
 
-/*
-  Both values are inlined at build time, so this is safe in client components.
-  NEXT_PUBLIC_VERCEL_ENV is set by Vercel automatically ("production",
-  "preview", or "development"). Anywhere else — including a production build on
-  other hosting — it is undefined, so the samples stay hidden.
-*/
+// Samples show only in dev or Vercel preview, never in a production build on any host.
 const isPreviewEnvironment =
   process.env.NODE_ENV === "development" ||
   process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
 
-/** True when the section is showing placeholders rather than real quotes. */
 export const showingSampleTestimonials =
   testimonials.length === 0 && isPreviewEnvironment;
 
-/** What the `Testimonials` section actually renders. */
 export const displayedTestimonials: Testimonial[] = showingSampleTestimonials
   ? sampleTestimonials
   : testimonials;

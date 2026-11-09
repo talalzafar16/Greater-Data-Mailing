@@ -2,13 +2,6 @@ import { Container } from "@/components/ui/container";
 import { FadeIn } from "@/components/ui/fade-in";
 import { aboutCopy } from "@/data/copy";
 
-/**
- * Full-bleed paper band carrying the mission statement at display scale.
- *
- * The type is General Sans at the top of the scale rather than a serif — the
- * design system defines exactly two families, and introducing a third here
- * would break the rest of the site for one line of copy.
- */
 function MissionCallout() {
   return (
     <section className="on-light bg-paper py-24">

@@ -21,10 +21,7 @@ function CTABand({
   className,
   ...props
 }: CTABandProps) {
-  // `bg-growth-deep`, not `bg-growth`. On #16a34a the supporting line at
-  // white/85 measures 2.78:1 and full white only 3.30:1 — both under AA. On
-  // #15803d full white is 5.02:1, so the band darkens slightly and the
-  // supporting line goes to full white rather than 85%.
+  // `bg-growth-deep`, not `bg-growth`: white text on the lighter green fails AA contrast.
   return (
     <section className={cn("bg-growth-deep py-20", className)} {...props}>
       <Container className="flex flex-col items-center text-center">

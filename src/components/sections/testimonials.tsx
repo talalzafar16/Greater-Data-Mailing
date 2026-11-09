@@ -20,14 +20,7 @@ interface TestimonialsProps {
   title?: string;
 }
 
-/**
- * Quote carousel, one testimonial at a time.
- *
- * Renders `null` when there is nothing to show — in production that means
- * until real, attributable quotes are collected. On localhost and preview
- * deploys it shows the sample quotes instead, with a visible "preview only"
- * note so nobody mistakes them for real feedback.
- */
+/** Renders null when there are no quotes; sample quotes show only outside production. */
 function Testimonials({
   eyebrow = "Client Feedback",
   title = "What our clients say.",
@@ -58,11 +51,6 @@ function Testimonials({
           aria-hidden="true"
         />
 
-        {/*
-          `aria-live` announces the new quote when the controls change it;
-          `mode="wait"` keeps the outgoing quote from overlapping the incoming
-          one, so the block never shows two texts at once.
-        */}
         <div aria-live="polite" aria-atomic="true" className="mt-8">
           <AnimatePresence mode="wait" initial={false}>
             <motion.blockquote

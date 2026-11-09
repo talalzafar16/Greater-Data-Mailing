@@ -1,11 +1,4 @@
-/**
- * Section and page copy.
- *
- * Everything a non-developer might want to reword lives here rather than
- * inside a component, so editing text never means opening a `.tsx` file.
- * Structured content with its own shape — services, industries, stats,
- * testimonials, navigation — stays in its own dedicated file.
- */
+// Section and page copy, kept out of components so rewording never means editing a `.tsx` file.
 
 export const heroCopy = {
   eyebrow: "Long Island Direct Mail Experts",
@@ -83,10 +76,7 @@ export const servicesHubCopy = {
   title: "Printing, mailing, and data services under one roof.",
   subtitle:
     "One team cleans your list, prints your piece, and gets it into mailboxes at the lowest postal rate you qualify for.",
-  /*
-    The grid heading is not decoration: without an h2 between the page h1 and
-    the h3 on each service card, the document outline skips a level.
-  */
+  // Required: this h2 stops the outline skipping from the page h1 to the card h3s.
   gridEyebrow: "What We Do",
   gridTitle: "Four services, one building.",
 };
@@ -143,7 +133,6 @@ export const contactCopy = {
   subtitle:
     "Tell us a little about the project. We'll respond within one business day with pricing and recommendations.",
   infoHeading: "Reach us directly",
-  // Confirmed by the client.
   hours: "Monday – Friday, 8:30am – 5:00pm",
   calloutPrefix: "Prefer to talk it through? Call",
 };

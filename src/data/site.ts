@@ -1,10 +1,4 @@
-/**
- * Canonical NAP (name, address, phone) record for Greater Data & Mailing.
- *
- * This is the single source of truth for anything that must stay consistent
- * across the site, structured data, and third-party listings. Change it here
- * and nowhere else.
- */
+// Canonical NAP (name, address, phone) record. Change it here and nowhere else.
 
 export interface PostalAddress {
   street: string;
@@ -30,7 +24,7 @@ export interface SiteConfig {
   url: string;
   address: PostalAddress;
   phone: PhoneNumber;
-  /** Kept for reference — the client asked that it NOT be published. */
+  /** Do NOT publish this number on the site. */
   cell: PhoneNumber;
   email: string;
   emailHref: string;
@@ -40,16 +34,7 @@ export const site: SiteConfig = {
   name: "Greater Data & Mailing",
   descriptor: "Print · Mail · Data",
   tagline: "Data-driven direct mail, printed and mailed under one roof.",
-  /*
-    Confirmed by the client: www.greaterdata.com. Still overridable via
-    NEXT_PUBLIC_SITE_URL so preview deploys can point somewhere else.
-
-    `||`, not `??`: a variable that is declared but left blank arrives as ""
-    rather than undefined, and `??` would let that through to
-    `new URL(site.url)` in app/layout.tsx — which throws and fails the build
-    with an error that names /_not-found instead of the empty variable.
-    Treat blank the same as unset.
-  */
+  // `||` not `??`: a blank env var arrives as "" and would make `new URL(site.url)` throw at build.
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.greaterdata.com",
   address: {
     street: "551 Acorn Street",
@@ -70,5 +55,4 @@ export const site: SiteConfig = {
   emailHref: "mailto:info@greaterdata.com",
 };
 
-/** One-line address, e.g. for footers and meta tags. */
 export const formattedAddress = `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.zip}`;

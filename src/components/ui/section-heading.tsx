@@ -35,10 +35,7 @@ function SectionHeading({
 
       <h2 className={cn(eyebrow && "mt-4")}>{title}</h2>
 
-      {/*
-        No colour utility here on purpose: the subtitle inherits the surface's
-        body colour — slate on white/paper, white at 70% on ink.
-      */}
+      {/* No colour utility on purpose: the subtitle inherits the surface's body colour. */}
       {subtitle ? (
         <p className="mt-6 max-w-[60ch] text-lg">{subtitle}</p>
       ) : null}

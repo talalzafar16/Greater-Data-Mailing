@@ -6,16 +6,12 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { whyUsCopy } from "@/data/copy";
 
-
-
-
 function WhyUs() {
   return (
     <Section variant="paper">
       <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
         <FadeIn className="lg:col-span-5">
           <div className="relative mx-auto max-w-md lg:mx-0">
-            {/* Offset frame, 8px down and right, sitting behind the image. */}
             <div
               aria-hidden="true"
               className="absolute inset-0 translate-x-2 translate-y-2 rounded-2xl border-2 border-growth"
@@ -39,11 +35,7 @@ function WhyUs() {
             />
           </FadeIn>
 
-          {/*
-            `FadeIn` renders a div, so a real <ul>/<li> would be invalid markup.
-            ARIA list roles give screen readers the same "4 items" semantics
-            without needing an `as` prop on the motion primitive.
-          */}
+          {/* `FadeIn` renders divs, so ARIA list roles stand in for <ul>/<li>. */}
           <FadeInStagger role="list" className="mt-10 flex flex-col gap-6">
             {whyUsCopy.reasons.map((reason) => (
               <FadeIn key={reason.title} role="listitem" className="flex gap-4">

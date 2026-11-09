@@ -14,17 +14,8 @@ import {
 import { cn } from "@/lib/utils";
 import { mainNav } from "@/data/nav";
 
-/**
- * Shared shape for a top-level nav item. The 2px underline is an `::after`
- * so it never affects layout — inactive and active items sit on the same
- * baseline.
- */
-/*
-  The shadcn nav-menu styles paint a muted background on hover, focus and open.
-  `twMerge` drops the plain-state ones, but the compound state variants
-  (`data-active:hover:…`, `data-open:hover:…`) are distinct keys that survive
-  the merge and outrank a bare `hover:` rule — so each is neutralised by name.
-*/
+// Compound state variants (`data-open:hover:…` etc.) survive twMerge and outrank `hover:`,
+// so each shadcn muted background is neutralised by name.
 const navItemClass =
   "relative flex h-10 items-center rounded-lg bg-transparent px-3 text-[15px] font-medium text-slate transition-colors hover:bg-transparent hover:text-ink focus:bg-transparent data-active:bg-transparent data-active:hover:bg-transparent data-active:focus:bg-transparent data-popup-open:bg-transparent data-popup-open:hover:bg-transparent data-open:bg-transparent data-open:hover:bg-transparent data-open:focus:bg-transparent";
 
@@ -41,9 +32,7 @@ function DesktopNav({ className }: { className?: string }) {
   const pathname = usePathname();
 
   return (
-    // `viewport={false}` renders each panel in place instead of inside a
-    // shared, content-sized viewport — which is what lets the Services panel
-    // be a fixed-width grid rather than a narrow list.
+    // `viewport={false}` renders panels in place, letting Services be a fixed-width grid.
     <NavigationMenu viewport={false} className={className}>
       <NavigationMenuList className="gap-1">
         {mainNav.map((item) => {

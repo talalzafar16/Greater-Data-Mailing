@@ -1,12 +1,4 @@
-/**
- * Per-page titles and meta descriptions.
- *
- * All SEO copy lives here rather than in the page components, so titles and
- * descriptions can be reviewed as a set. Descriptions are held to 150–160
- * characters — long enough to use the full search snippet, short enough not to
- * be truncated — and each names Deer Park or Long Island where it reads
- * naturally.
- */
+// Per-page titles and meta descriptions. Keep descriptions to 150–160 characters.
 
 export interface PageSeo {
   title: string;

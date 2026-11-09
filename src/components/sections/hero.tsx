@@ -12,7 +12,6 @@ function Hero() {
   return (
     <section className="bg-dot-grid relative flex min-h-[88vh] items-center py-16 lg:py-24">
       <Container className="grid w-full items-center gap-12 lg:grid-cols-12 lg:gap-16">
-        {/* Left: copy. Each block is one 0.1s step behind the last. */}
         <div className="lg:col-span-7">
           <FadeIn>
             <p className="font-heading text-xs font-semibold tracking-[0.1em] text-growth-text uppercase">
@@ -25,11 +24,6 @@ function Hero() {
               <span className="block">{heroCopy.titleLine1}</span>
               <span className="relative inline-block">
                 {heroCopy.titleLine2}
-                {/*
-                  Hand-drawn swash rather than `text-decoration`: it stretches
-                  with the text (preserveAspectRatio="none") and keeps the
-                  slight rise of a brush stroke.
-                */}
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 200 12"
@@ -84,15 +78,10 @@ function Hero() {
           </FadeIn>
         </div>
 
-        {/* Right: portrait visual with the overlapping stat card. */}
         <div className="lg:col-span-5">
           <div className="relative mx-auto max-w-md lg:mr-0">
             <HeroVisual>
-              {/*
-                The file is already cropped 4:5, so `object-cover` only guards
-                against a future swap at a different ratio. `priority` because
-                this is the largest above-the-fold paint.
-              */}
+              {/* `priority`: this is the LCP image. */}
               <Image
                 src={heroCopy.image}
                 alt={heroCopy.imageAlt}
@@ -106,9 +95,7 @@ function Hero() {
 
             <FadeIn
               delay={0.6}
-              // `-left-4` on the smallest screens keeps a gutter between the
-              // card and the viewport edge; the image sits in a 24px padded
-              // container, so -6 would land it flush.
+              // `-left-4` below sm keeps a gutter; -6 would sit flush with the viewport edge.
               className="absolute -bottom-6 -left-4 rounded-xl bg-white p-5 shadow-lift sm:-left-6"
             >
               <p className="font-heading text-[40px] leading-none font-bold text-growth-text">

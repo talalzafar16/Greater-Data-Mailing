@@ -31,8 +31,7 @@ function MobileNav({ className }: { className?: string }) {
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
 
-  // Every link is wrapped in `SheetClose`, which dismisses the sheet on click —
-  // so navigation never leaves the menu covering the page it just opened.
+  // Wrap every link in `SheetClose` so navigating dismisses the sheet.
 
   const linkClass = (active: boolean) =>
     cn(
@@ -42,11 +41,7 @@ function MobileNav({ className }: { className?: string }) {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      {/*
-        Radix supplies aria-haspopup, aria-expanded and aria-controls on the
-        trigger, and SheetTitle names the dialog — only the icon button needs
-        an accessible label of its own.
-      */}
+      {/* Radix supplies the trigger's ARIA state; only the icon button needs its own label. */}
       <SheetTrigger asChild>
         <Button
           variant="ghost"

@@ -1,11 +1,4 @@
-/**
- * Shared motion language.
- *
- * The curves here are all decelerating with no overshoot — motion should read
- * as engineered, not springy. Nothing in this file bounces on purpose; if a
- * component needs a different feel, change it here rather than locally so the
- * whole site stays in sync.
- */
+// Shared motion: decelerating curves, no overshoot. Change the feel here, not per component.
 
 /** easeOutQuint-ish. Fast start, long settle, no overshoot. */
 export const EASE_ENGINEERED: [number, number, number, number] = [
@@ -23,10 +16,7 @@ export const STAGGER_CHILDREN = 0.08;
 /** Pixels a `FadeIn` travels upward as it resolves. */
 export const FADE_DISTANCE = 24;
 
-/**
- * Trigger the animation slightly before the element reaches the fold, so it has
- * finished by the time it is comfortably in view.
- */
+// Fires just before the fold so the animation has finished once the element is in view.
 export const VIEWPORT = { once: true, margin: "-80px" } as const;
 
 export const fadeVariants = {

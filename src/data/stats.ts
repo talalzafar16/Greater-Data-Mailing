@@ -1,20 +1,11 @@
-/**
- * Proof-point numbers for the stats band.
- *
- * Confirmed by the client (Aug 2026). Re-confirm before reusing these in paid
- * advertising — postage savings and annual volume are claims that can be held
- * against the business.
- */
-
 export interface Stat {
-  /** Numeric portion, kept separate so it can be count-up animated. */
+  /** Plain number only (it animates); put symbols in prefix/suffix. */
   value: number;
   /** Rendered before the value, e.g. "$". */
   prefix?: string;
   /** Rendered after the value, e.g. "M+", "%", "hrs". */
   suffix?: string;
   label: string;
-  /** Optional clarifying line under the label. */
   description?: string;
 }
 

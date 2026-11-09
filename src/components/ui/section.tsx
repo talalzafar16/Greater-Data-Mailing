@@ -4,13 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
 
-/**
- * `section-y` carries the vertical rhythm (64px mobile → 96px desktop).
- *
- * `on-light` / `on-ink` set the inherited heading and body colours (see
- * `globals.css`), so headings and copy adapt to the background without any
- * prop drilling — and a light card nested in an ink section can opt back out.
- */
+// `on-light`/`on-ink` set the inherited heading and body colours (see globals.css).
 const sectionVariants = cva("section-y", {
   variants: {
     variant: {

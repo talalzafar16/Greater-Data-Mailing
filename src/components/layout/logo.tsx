@@ -8,18 +8,7 @@ import { site } from "@/data/site";
 const MARK_WIDTH = 400;
 const MARK_HEIGHT = 273;
 
-/**
- * Brand lockup — the logo mark beside the company name and descriptor.
- *
- * Only the *mark* is used, not the full stacked logo with its serif wordmark:
- * at an 80px header height that wordmark would be unreadable, and its serif
- * type fights General Sans. Pairing the mark with the site's own typography
- * keeps it legible and on-system.
- *
- * Text colours come from the inherited surface variables, so the same component
- * reads navy-on-white in the header and white-on-navy in the footer with no
- * variant prop.
- */
+/** Uses only the logo mark, not the full stacked logo, whose wordmark is unreadable at header size. */
 function Logo({
   className,
   ...props
@@ -33,8 +22,7 @@ function Logo({
     >
       <Image
         src="/logo-mark.png"
-        // Decorative: the adjacent text and the link's aria-label already name
-        // the company, so announcing it a third time is just noise.
+        // Decorative: the link's aria-label already names the company.
         alt=""
         width={MARK_WIDTH}
         height={MARK_HEIGHT}

@@ -4,34 +4,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ---------------------------------------------------------------------------
-   Brand tokens — Greater Data & Mailing
-   Raw design values. Everything else in this file maps onto these.
---------------------------------------------------------------------------- */
 :root {
-  --ink: #0d1b2a; /* navy — primary, dark sections, headings */
-  --growth: #16a34a; /* green — decorative fills, tints, borders, rails */
-  --paper: #f8f6f2; /* alternating section backgrounds */
-  --white: #ffffff; /* cards */
-  --slate: #5f6e85; /* body text — see contrast note below */
-  --line: #e2e8f0; /* borders */
+  --ink: #0d1b2a;
+  --growth: #16a34a;
+  --paper: #f8f6f2;
+  --white: #ffffff;
+  --slate: #5f6e85;
+  --line: #e2e8f0;
 
-  /*
-    WCAG AA corrections. Measured, not estimated:
-
-    - `slate` was #64748b, which is 4.41:1 on paper — under the 4.5:1 floor for
-      normal text. #5f6e85 measures 4.80:1 on paper and 5.18:1 on white.
-
-    - `growth` #16a34a is only 3.30:1 against white and 3.05:1 against paper, so
-      it cannot carry small text on a light surface, and white text cannot sit
-      on it (also 3.30:1 — this affected the primary button). `--growth-deep`
-      is 5.02:1 both ways. It is used for green text on light backgrounds and
-      for any green fill carrying white text.
-
-    - On navy the relationship inverts: #16a34a is 5.28:1 on ink while
-      `--growth-deep` is only 3.47:1. So green *text* is surface-aware —
-      `--growth-text` below — while decorative fills stay `--growth`.
-  */
+  /* WCAG AA: slate is 4.80:1 on paper. growth is only ~3.3:1 on light surfaces, so green
+     text or white-on-green uses --growth-deep (5.02:1); on ink it inverts (see .on-ink). */
   --growth-deep: #15803d;
   --growth-deep-hover: color-mix(in oklch, var(--growth-deep), black 8%);
 
@@ -40,14 +22,9 @@
 
   --ink-hover: color-mix(in oklch, var(--ink), black 8%);
 
-  /*
-    Ink at 4%, written as a literal rather than `color-mix`. The generated
-    `color-mix` fallback collapses to the first colour — which would paint
-    solid navy dots on browsers that lack it, rather than a faint texture.
-  */
+  /* Literal, not color-mix: its fallback would paint solid navy dots on unsupporting browsers. */
   --dot-grid-color: rgb(13 27 42 / 0.04);
 
-  /* --- shadcn semantic tokens, mapped onto the brand palette --- */
   --background: var(--white);
   --foreground: var(--ink);
   --card: var(--white);
@@ -89,11 +66,7 @@
   --sidebar-ring: var(--growth);
 }
 
-/*
-  The marketing site is light-only by design; dark sections are painted with
-  `bg-ink`, not a theme switch. This block exists so any shadcn component
-  rendered inside a `.dark` scope stays legible.
-*/
+/* Site is light-only (dark sections use bg-ink); this keeps shadcn components legible in a .dark scope. */
 .dark {
   --background: var(--ink);
   --foreground: var(--white);
@@ -117,11 +90,7 @@
   --sidebar-border: oklch(1 0 0 / 12%);
 }
 
-/* ---------------------------------------------------------------------------
-   Tailwind theme
---------------------------------------------------------------------------- */
 @theme inline {
-  /* Brand scale — `bg-ink`, `text-growth`, `bg-paper`, `text-slate`, … */
   --color-ink: var(--ink);
   --color-ink-hover: var(--ink-hover);
   --color-growth: var(--growth);
@@ -134,7 +103,6 @@
   --color-slate: var(--slate);
   --color-line: var(--line);
 
-  /* shadcn semantic scale */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -167,44 +135,31 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Type */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-general-sans), var(--font-inter), ui-sans-serif,
     system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Radius — 8px buttons/inputs (`rounded-lg`), 12px cards (`rounded-xl`) */
-  --radius-sm: 0.25rem; /* 4px  */
-  --radius-md: 0.375rem; /* 6px  */
-  --radius-lg: 0.5rem; /* 8px  — buttons, inputs */
-  --radius-xl: 0.75rem; /* 12px — cards */
-  --radius-2xl: 1rem; /* 16px */
-  --radius-3xl: 1.5rem; /* 24px */
-  --radius-4xl: 2rem; /* 32px */
+  /* Buttons/inputs use rounded-lg (8px), cards rounded-xl (12px). */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
   --radius-button: 0.5rem;
   --radius-card: 0.75rem;
 
-  /*
-    Shadows are hover-only by convention — nothing carries elevation at rest.
-    Use `hover:shadow-lift` / `hover:shadow-lift-sm`.
-  */
+  /* Shadows are hover-only by convention (hover:shadow-lift / hover:shadow-lift-sm). */
   --shadow-lift-sm: 0 4px 12px -4px rgb(13 27 42 / 0.1);
   --shadow-lift: 0 12px 32px -12px rgb(13 27 42 / 0.18);
 
-  /* Layout */
-  --container-page: 80rem; /* 1280px */
+  --container-page: 80rem;
 }
 
-/* ---------------------------------------------------------------------------
-   Base
---------------------------------------------------------------------------- */
 @layer base {
-  /*
-    `outline-ring/50` removed from here: it set a competing `outline-color` on
-    every element, so focused controls picked up a half-transparent ring
-    instead of the solid one defined at the bottom of this file. Outlines are
-    owned by that single rule now.
-  */
+  /* No outline-ring here: it would compete with the :focus-visible rule at the bottom. */
   * {
     @apply border-border;
   }
@@ -218,7 +173,7 @@
   body {
     @apply bg-background;
     color: var(--body-color);
-    font-size: 1.125rem; /* 18px */
+    font-size: 1.125rem;
     line-height: 1.7;
   }
 
@@ -254,16 +209,8 @@
     text-wrap: pretty;
   }
 
-  /*
-    Surfaces.
-
-    Text colour is inherited through two custom properties rather than matched
-    with descendant selectors, so nesting resolves correctly at any depth: a
-    white `FeatureCard` (`.on-light`) inside a navy `Section` (`.on-ink`) puts
-    its headings back to ink and its body back to slate, instead of staying
-    white-on-white. Both live in `base`, so an explicit `text-*` utility on any
-    element still wins.
-  */
+  /* Surface text colour inherits via custom properties so nested .on-ink/.on-light
+     resolve at any depth. Kept in `base` so explicit text-* utilities still win. */
   .on-ink {
     --heading-color: var(--white);
     --body-color: color-mix(in oklab, var(--white) 70%, transparent);
@@ -279,14 +226,7 @@
     color: var(--body-color);
   }
 
-  /*
-    Reduced-motion backstop.
-
-    The Framer primitives already branch on `useReducedMotion`, and transforms
-    are gated behind Tailwind's `motion-safe:`. This catches everything else —
-    third-party keyframes, `tw-animate-css` enter/exit, anything added later
-    that forgets. State changes still happen, they just arrive instantly.
-  */
+  /* Reduced-motion backstop for animations not gated by useReducedMotion or motion-safe:. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -299,26 +239,15 @@
   }
 }
 
-/* ---------------------------------------------------------------------------
-   Layout utilities
-
-   Spacing follows an 8pt grid: Tailwind's base unit is 4px, so even-numbered
-   spacing utilities (`p-2` 8px, `gap-4` 16px, `mt-6` 24px, `py-8` 32px …)
-   land on the grid. Prefer those.
---------------------------------------------------------------------------- */
-
-/* Centered 1280px column with a 24px gutter on mobile. */
+/* Spacing follows an 8pt grid: prefer even-numbered spacing utilities. */
 @utility container-page {
   width: 100%;
   max-width: var(--container-page);
   margin-inline: auto;
-  padding-inline: --spacing(6); /* 24px */
+  padding-inline: --spacing(6);
 }
 
-/*
-  Faint navy dot grid — the "engineering graph paper" texture behind the hero.
-  Deliberately at 4% so it reads as paper stock, not as a pattern.
-*/
+/* Hero dot grid; kept at 4% so it reads as texture, not a pattern. */
 @utility bg-dot-grid {
   background-image: radial-gradient(
     circle,
@@ -328,31 +257,17 @@
   background-size: 24px 24px;
 }
 
-/* Vertical section rhythm: 64px mobile → 96px desktop. */
 @utility section-y {
-  padding-block: --spacing(16); /* 64px */
+  padding-block: --spacing(16);
 
   @media (width >= 48rem) {
-    padding-block: --spacing(24); /* 96px */
+    padding-block: --spacing(24);
   }
 }
 
-/* ---------------------------------------------------------------------------
-   Focus
-
-   Deliberately UNLAYERED. Cascade layers outrank specificity, so a rule inside
-   `@layer base` would lose to Tailwind's `outline-none` utility — which several
-   shadcn components apply — no matter how specific it was. Unlayered styles beat
-   every layer, so this guarantees one consistent, visible focus ring on every
-   interactive element in the app.
---------------------------------------------------------------------------- */
+/* Deliberately unlayered so it beats layered utilities. This is the only focus style:
+   don't reintroduce outline-none / focus:ring-0 on components. */
 :focus-visible {
-  /*
-    The shadcn components' `outline-none` / `focus:outline-none` utilities were
-    stripped so this rule is the only thing drawing focus. They also had
-    `focus:ring-0 focus:outline-none` on links inside the nav dropdown panel,
-    which removed the indicator entirely from a keyboard path.
-  */
   outline: 2px solid var(--growth-deep);
   outline-offset: 2px;
 }

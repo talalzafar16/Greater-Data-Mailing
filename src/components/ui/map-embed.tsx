@@ -7,13 +7,7 @@ interface MapEmbedProps {
   tintOpacity?: number;
 }
 
-/**
- * Google Maps embed for the Deer Park plant.
- *
- * Uses the keyless `output=embed` endpoint, so there is no API key to manage.
- * The address comes from `site.ts`, keeping the pin and the printed NAP in
- * sync.
- */
+/** Keyless `output=embed` Google Maps iframe; the address comes from site.ts to match the NAP. */
 function MapEmbed({ className, tintOpacity = 15 }: MapEmbedProps) {
   const query = encodeURIComponent(`${site.name}, ${formattedAddress}`);
 

@@ -50,7 +50,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   },
 ];
 
-/** The connecting line takes this long to travel the full rail. */
+/** Line travel time; node delays derive from it so each circle resolves as the line arrives. */
 const LINE_DURATION = 1.2;
 
 interface ProcessRailProps {
@@ -59,14 +59,6 @@ interface ProcessRailProps {
   className?: string;
 }
 
-/**
- * The signature process rail — reused on every service sub-page.
- *
- * A single `whileInView` on the wrapper drives everything: the line variant
- * runs for {@link LINE_DURATION}, and each circle's delay is its fraction of
- * that same span, so a circle resolves exactly as the line arrives at it.
- * Because the two are pinned to one duration constant, they cannot drift.
- */
 function ProcessRail({
   title = processRailCopy.title,
   steps = PROCESS_STEPS,
@@ -112,12 +104,7 @@ function ProcessRail({
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT}
-          /*
-            `--rail-y` is the distance from the top of a step to its circle's
-            centre: the 24px icon, its 16px margin, then half of the 56px
-            circle. The horizontal line is pinned to it so the two stay aligned
-            if the icon size ever changes.
-          */
+          // `--rail-y` = circle centre: 24px icon + 16px margin + half the 56px circle.
           className="relative mt-16 [--rail-y:68px]"
         >
           {/* Desktop: horizontal track, inset to the first and last centres. */}
@@ -156,7 +143,6 @@ function ProcessRail({
                     variants={nodeVariants}
                     className="flex shrink-0 flex-col items-center"
                   >
-                    {/* Desktop only: the icon sits above the circle. */}
                     <Icon
                       className="mb-4 hidden size-6 text-growth-text md:block"
                       aria-hidden="true"
@@ -169,7 +155,6 @@ function ProcessRail({
 
                   <motion.div custom={index} variants={nodeVariants} className="md:mt-6">
                     <h3 className="flex items-center gap-2 text-lg md:justify-center">
-                      {/* Mobile only: the icon moves inline with the label. */}
                       <Icon
                         className="size-5 shrink-0 text-growth-text md:hidden"
                         aria-hidden="true"

@@ -76,21 +76,12 @@ function Capabilities({
   service: Service;
   variant: SurfaceVariant;
 }) {
-  /*
-    Alternate rows tint against whichever surface the section landed on, so the
-    banding stays visible whether this block is white or paper.
-  */
   const altRowClass = variant === "white" ? "bg-paper" : "bg-white";
 
   return (
     <Section variant={variant}>
       <SectionHeading title={serviceDetailCopy.capabilitiesHeading} />
 
-      {/*
-        A description list rather than a <table>: these are term/definition
-        pairs, not a data grid, and `dl` reflows to a single column on narrow
-        screens without the display-table override a real table would need.
-      */}
       <dl className="mt-10 overflow-hidden rounded-xl border border-border">
         {service.capabilities?.map((group, index) => (
           <div
@@ -122,16 +113,7 @@ function Capabilities({
   );
 }
 
-/**
- * The service sub-page template — one component, driven entirely by a
- * `Service` record.
- *
- * `included` and `capabilities` are both optional and no service currently
- * has both, so the middle of the page varies in length. Rather than hard-code
- * each block's background, the blocks that are actually present are collected
- * first and then alternated white → paper, which keeps the rhythm correct for
- * any combination and guarantees two paper sections never touch.
- */
+/** Optional blocks vary per service, so present blocks alternate white/paper and paper never touches paper. */
 function ServiceDetail({ service }: { service: Service }) {
   const related = service.relatedIndustries
     .map((slug) => industries.find((industry) => industry.slug === slug))

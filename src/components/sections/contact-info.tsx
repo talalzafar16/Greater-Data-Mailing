@@ -10,7 +10,6 @@ import { MapEmbed } from "@/components/ui/map-embed";
 import { site } from "@/data/site";
 import { contactCopy } from "@/data/copy";
 
-
 function InfoRow({
   icon: Icon,
   label,

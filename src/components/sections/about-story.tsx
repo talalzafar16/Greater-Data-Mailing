@@ -5,9 +5,6 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { aboutCopy } from "@/data/copy";
 
-
-
-
 function AboutStory() {
   return (
     <Section variant="white">

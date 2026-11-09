@@ -1,14 +1,10 @@
-/**
- * Service catalogue — the single source of truth for the services hub, the
- * four sub-pages, the homepage trio, and the header dropdown.
- */
+// Single source for the services hub, sub-pages, homepage trio, and header dropdown.
 
 import { Database, Mail, MapPin, Printer, type LucideIcon } from "lucide-react";
 
 export interface ServiceCapabilityGroup {
   /** e.g. "Printing Department" */
   department: string;
-  /** Rendered as badge pills. */
   items: string[];
 }
 
@@ -27,11 +23,9 @@ export interface Service {
   summary: string;
   /** One-line promise under the sub-page h1. */
   promise: string;
-  /** Two short paragraphs for the sub-page "What it is" block. */
   whatItIs: [string, string];
   /** Checklist items. Mutually exclusive with `capabilities` in practice. */
   included?: string[];
-  /** Department → capability pills. */
   capabilities?: ServiceCapabilityGroup[];
   /** Slugs from `industries.ts`. */
   relatedIndustries: string[];
@@ -184,7 +178,6 @@ export const services: Service[] = [
   },
 ];
 
-/** Path to a service's detail page. */
 export function serviceHref(service: Pick<Service, "slug">): string {
   return `/services/${service.slug}`;
 }

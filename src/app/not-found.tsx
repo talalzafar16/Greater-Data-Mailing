@@ -13,7 +13,6 @@ export const metadata: Metadata = buildMetadata("notFound");
 export default function NotFound() {
   return (
     <main>
-      {/* Navy hero, matching the treatment on every other inner page. */}
       <section className="on-ink bg-ink py-24 md:py-32">
         <Container>
           <p className="font-heading text-xs font-semibold tracking-[0.1em] text-growth-text uppercase">

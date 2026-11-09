@@ -8,13 +8,9 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface AnimatedCounterProps
   extends Omit<React.ComponentProps<"span">, "children"> {
-  /** The number to count up to. */
   value: number;
-  /** Rendered before the number, e.g. "$". */
   prefix?: string;
-  /** Rendered after the number, e.g. "+", "M", "%". */
   suffix?: string;
-  /** Decimal places to hold steady while counting. */
   decimals?: number;
 }
 
@@ -43,8 +39,7 @@ function AnimatedCounter({
     return () => controls.stop();
   }, [isInView, reduceMotion, value]);
 
-  // Reduced motion never animates, so the settled value is derived during
-  // render rather than pushed through state from an effect.
+  // With reduced motion, derive the final value during render rather than setting state in an effect.
   const shown = reduceMotion ? value : displayed;
 
   const format = (n: number) =>
@@ -55,11 +50,7 @@ function AnimatedCounter({
 
   return (
     <span ref={ref} data-slot="animated-counter" className={className} {...props}>
-      {/*
-        The ticking text is hidden from assistive tech — announcing every frame
-        would be noise. Screen readers get the settled value once instead.
-        `tabular-nums` stops the digits reflowing as they change width.
-      */}
+      {/* Ticking digits are aria-hidden; screen readers get the final value once. */}
       <span aria-hidden="true" className="tabular-nums">
         {format(shown)}
       </span>

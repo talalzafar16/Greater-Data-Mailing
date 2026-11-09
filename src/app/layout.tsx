@@ -15,7 +15,6 @@ import "./globals.css";
 const { title, description } = pageSeo["/"];
 
 export const metadata: Metadata = {
-  // Resolves relative URLs in Open Graph and canonical tags.
   metadataBase: new URL(site.url),
   title: {
     default: title,
@@ -23,13 +22,8 @@ export const metadata: Metadata = {
   },
   description,
   applicationName: site.name,
-  /*
-    No `alternates.canonical` here on purpose. Metadata fields are inherited by
-    every page that does not override them, so a canonical set on the root
-    layout would make /about, /services, /contact and the rest each declare
-    themselves a duplicate of the homepage — and drop out of the index. Each
-    page sets its own.
-  */
+  // No `alternates.canonical` here: every page would inherit it, declare itself a
+  // homepage duplicate and drop out of the index. Each page sets its own.
   openGraph: {
     type: "website",
     siteName: site.name,
@@ -49,7 +43,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  // Helps search engines tie the site to the physical location.
   other: {
     "geo.region": `US-${site.address.state}`,
     "geo.placename": site.address.city,
@@ -65,12 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${fontVariables} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
-        {/*
-          In the body, not <head>: that is the placement the Next.js JSON-LD
-          guide shows, and search engines read it from anywhere in the
-          document. A manual <head> in the root layout also risks colliding
-          with the metadata Next injects there.
-        */}
+        {/* JSON-LD in the body per the Next.js guide; a manual <head> here can clash with injected metadata. */}
         <StructuredData />
         <WebsiteSchema />
 

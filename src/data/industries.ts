@@ -1,7 +1,3 @@
-/**
- * Industries served — the verticals the company targets.
- */
-
 import {
   Building2,
   HeartHandshake,
@@ -23,7 +19,6 @@ export interface Industry {
   /** Typical mail pieces this vertical sends. */
   pieces?: string[];
   icon: LucideIcon;
-  /** Problems this vertical typically brings to us. */
   painPoints?: string[];
   /** Slugs from `services.ts` that matter most to this vertical. */
   relatedServices?: string[];

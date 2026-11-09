@@ -34,10 +34,6 @@ function IndustriesStrip({
 
           return (
             <FadeIn key={industry.slug} className="flex">
-              {/*
-                The whole tile is the link target, so it reuses the card
-                treatment directly rather than nesting a card inside a link.
-              */}
               <Link
                 href="/industries"
                 className={cn(

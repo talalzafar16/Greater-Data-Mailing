@@ -8,24 +8,8 @@ import { Section } from "@/components/ui/section";
 import { PageHero } from "@/components/sections/page-hero";
 import { formattedAddress, site } from "@/data/site";
 
-/*
-  General-purpose privacy policy for a small B2B mail house.
-
-  It describes how this site actually behaves (a Web3Forms-backed quote form,
-  an embedded Google Map, no advertising or analytics cookies) and the
-  standard service-provider role a mail house plays with client lists. Claims
-  about internal practices are kept to industry-standard commitments rather
-  than specific operational detail.
-
-  It has not been reviewed by an attorney. That is a reasonable starting point
-  for a site that collects only quote requests, but get one if the business
-  starts handling regulated data on the site itself (e.g. health records
-  under a HIPAA business associate agreement) or adds analytics/ad pixels.
-
-  When changing it: bump EFFECTIVE_DATE, and revisit Section 6 (cookies) if
-  analytics or advertising pixels are ever added.
-*/
-
+// General-purpose policy, not attorney-reviewed. When changing it, bump EFFECTIVE_DATE
+// (and revisit Section 6 if analytics or ad pixels are ever added).
 const EFFECTIVE_DATE = "November 9, 2026";
 
 export const metadata: Metadata = buildMetadata("/privacy");

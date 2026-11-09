@@ -17,13 +17,7 @@ function PresidentProfile() {
                 width={896}
                 height={1195}
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                /*
-                  `object-top`, not the default centre: the source is a 3:4
-                  portrait and this box is square (taller only once the bio
-                  sets the row height at `lg`), so a centred cover crop takes
-                  ~12% off the top and clips his hair. Anchoring to the top
-                  spends the whole overflow on the jacket instead.
-                */
+                // `object-top`: a centred crop of the 3:4 portrait into this square clips the head.
                 className="aspect-square w-full object-cover object-top lg:h-full"
               />
             </div>

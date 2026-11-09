@@ -21,8 +21,7 @@ function Header() {
       data-scrolled={scrolled}
       className={cn(
         "sticky top-0 z-50 h-20",
-        // Only the paint changes on scroll — height and layout stay fixed, so
-        // nothing below the header shifts as it solidifies.
+        // Only paint transitions on scroll; changing height here would shift the page.
         "border-b transition-[background-color,border-color,box-shadow] duration-300 ease-out",
         scrolled
           ? "border-border bg-white shadow-lift-sm"
